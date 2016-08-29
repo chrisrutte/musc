@@ -58,16 +58,6 @@ Rails.application.configure do
 #  toegevoegd met heroku gepiel
   config.middleware.delete Rack::Lock
 
-#  config.paperclip_defaults = {
-#  storage: :s3,
-#  s3_credentials: {
-#    bucket: ENV.fetch('muscpics'),
-#    access_key_id: ENV.fetch('AKIAIOW4KF26I7Y5PVYA'),
-#    secret_access_key: ENV.fetch('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'),
-#    s3_region: ENV.fetch('frankfurt'),
-#  }
-#  }
-
   Paperclip.options[:command_path] = 'C:/GnuWin32/bin; C:/ImageMagick'
 #  Paperclip.options[:swallow_stderr] = false
 
