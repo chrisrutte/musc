@@ -1,1 +1,141 @@
-<%= render 'form' %>
+<%= form_for :training, url: trainings_path do |f| %>
+ 
+  <% if @training.errors.any? %>
+    <div id="error_explanation">
+      <h2>
+        <%= pluralize(@training.errors.count, "error") %>. Je wilt toch dat je training snel gevonden wordt? Vul daarom alle velden in :)</h2>
+      <ul>
+        <% @training.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+ <div class="panel panel-default">
+	<div class="panel-heading">
+		Maak jouw training
+	</div>
+	<div class="panel-body">
+		<div class="container">
+
+			<%= form_for @training, html: { multipart: true } do |f| %>
+
+			<div class="row"> 
+				<div class="col-md-4 select">
+					<div class="form-group">
+						<label>Training type</label>
+						<%= f.select :tr_type, [["Bootcamp","Bootcamp"]], id: "tr_type", prompt: "Select...", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="col-md-4 select">
+					<div class="form-group">
+						<label>Intensiteit</label>
+						<%= f.select :tr_intensity, [["Low","Low"], ["Medium","Medium"],["High","High"]], id: "tr_intensity", prompt: "Select...", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="col-md-4 select">
+					<div class="form-group">
+						<label>Max deelnemers</label>
+						<%= f.select :tr_max_attendants, [["1","1"], ["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"]], id: "tr_max_attendants", prompt: "Select...", class: "form-control" %>
+					</div>
+				</div>
+
+				<div class="col-md-4 select">
+					<div class="form-group">
+						<label>Voor wie</label>
+						<%= f.select :tr_gender, [["Chicks","Chicks"], ["Dudes","Dudes"],["Allebei","Allebei"]], id: "tr_gender", prompt: "Select...", class: "form-control" %>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row">
+			</div>
+
+			<div class="row">
+			</div>
+
+
+			<div class="row">
+				<div class="form-group">
+					<label>Naam</label>
+					<%= f.text_field :tr_name, placeholder: "Naam", class: "form-control" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<label>Omschrijving</label>
+					<%= f.text_area :tr_description, rows: 5, placeholder: "Omschrijf je training zo dat iedereen wil meedoen", class: "form-control" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<label>Startlocatie</label>
+					<%= f.text_field :tr_location, placeholder: "Waar verzamelen jullie?", class: "form-control" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<label>Starttijd</label>
+					<%= f.time_field :tr_time, placeholder: "Hoe laat begint de training?", class: "form-control" %>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="form-group">
+					<label>Duur (minuten)</label>
+					<%= f.text_field :tr_duration, placeholder: "Hoelang duurt je training?", class: "form-control" %>
+				</div>
+			</div>			
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>Prijs per deelnemer per training</label>
+						<div class="input-group">
+							<div class="input-group-addon">€</div>
+						<%= f.text_field :tr_price, placeholder: "bv. €5", class: "form-control" %>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<%= f.check_box :tr_active %> Maak training actief
+					</div>
+				</div>
+			</div>			
+
+			<div class="row">
+				<div class="col-md-4">
+					<div class="form-group">
+						<span class="btn btn-default btn-file">
+							<i class = "fa fa-cloud-upload fa-lg"></i> Upload Photos
+							<%= file_field_tag "images[]", type: :file, multiple: true %>
+						</span>					
+					</div>
+				</div>
+			</div>
+
+			<div id="photos"><%= render 'photos/list' %></div>	
+
+			<div class="actions">
+				<%= f.submit "Opslaan", class: "btn btn-primary" %>
+			</div>
+			<% end %>
+
+		</div>
+	</div>
+</div>
+
+ 
+<% end %>
+ 
+<%= link_to 'Back', trainings_path %>
