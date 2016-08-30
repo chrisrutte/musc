@@ -47,6 +47,7 @@ gem 'geocoder'
 gem 'jquery-ui-rails'
 gem 'private_pub'
 gem 'thin'
+gem 'frontend-generators'
 
 gem 'ransack', '~> 1.6', '>= 1.6.6'
 
