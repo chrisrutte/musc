@@ -1,16 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-  
     <title>Musc</title>
     <%= csrf_meta_tags %>
+
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
 
     <script src="https://use.fontawesome.com/481602dcc0.js"></script>
 
+
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+
+
+
 
   </head>
 
@@ -20,9 +24,11 @@
 
 <%= render 'shared/message' %>
 
+
       <div class="container">
     	<%= yield %>
       </div>
+
 
   </body>
 </html>
