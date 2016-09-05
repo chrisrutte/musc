@@ -89,8 +89,9 @@ class TrainingsController < ApplicationController
 #          @training.errors.full_messages.each do |msg|  
 #            flash[:notice] = msg
 #          end
-          render :edit
           flash[:notice] = "Niet opgeslagen. Sommige velden zijn niet goed ingevuld" 
+          render :edit
+
         end
   end
 
