@@ -25,6 +25,7 @@ class TrainingsController < ApplicationController
     
    @reviews = @training.reviews
    @hasReview = @reviews.find_by(user_id: current_user.id) if current_user
+   
   end
 
   def new
@@ -44,13 +45,14 @@ class TrainingsController < ApplicationController
 
       @photos = @training.photos
 
-      redirect_to trainings_path, notice: "Saved..."
+      redirect_to trainings_path, notice: "Opgeslagen..."
     else
 #      if @training.errors.any?
 #        @training.errors.each do |message|
 #          flash[:notice] = message
 #        end
 #      end
+      flash[:notice] = "Niet opgeslagen. Sommige velden zijn niet goed ingevuld" 
       render :edit
     end
   end
@@ -79,7 +81,7 @@ class TrainingsController < ApplicationController
 
           @photos = @training.photos
 
-          redirect_to trainings_path, notice: "Updated..."
+          redirect_to trainings_path, notice: "Je training is opgeslagen"
         else
 #          if @training.errors.any?
 #            @training.errors.each do |error|

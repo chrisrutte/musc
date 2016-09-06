@@ -1,3 +1,7 @@
+<%= render 'form' %>
+
+<% if false %>
+
 <%= form_for :training, url: trainings_path do |f| %>
  
   <% if @training.errors.any? %>
@@ -136,6 +140,7 @@
 </div>
 
  
+<% end %>
 <% end %>
  
 <%= link_to 'Back', trainings_path %>
