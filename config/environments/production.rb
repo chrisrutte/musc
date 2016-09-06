@@ -88,18 +88,22 @@ Rails.application.configure do
     config.logger = ActiveSupport::TaggedLogging.new(logger)
   end
 
-#  config.paperclip_defaults = {
-#  storage: :s3,
-#  s3_credentials: {
-#    bucket: ENV.fetch('S3_BUCKET_NAME'),
-#    access_key_id: ENV.fetch('AWS_ACCESS_KEY_ID'),
-#    secret_access_key: ENV.fetch('AWS_SECRET_ACCESS_KEY'),
-#    s3_region: ENV.fetch('AWS_REGION'),
-#  }
-#}
+  config.paperclip_defaults = {
+    storage: :s3,
+    s3_credentials: {
+  #    bucket: ENV["S3_BUCKET_NAME"],
+      bucket: 'muscpics',
+      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+  #    s3_region: ENV["AWS_REGION"]
+      s3_region: 'eu-central-1',
+    },
 
-  Paperclip::Attachment.default_options[:url] = ':s3_domain_url'
-  Paperclip::Attachment.default_options[:path] = '/:class/:attachment/:id_partition/:style/:filename'
+  #  url: 's3_domain_url',
+  #  path: '/:class/:attachment/:id_partition/:style/:filename',
+  #  s3_host_name: 's3-eu-central-1.amazonaws.com',
+  }
+
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
