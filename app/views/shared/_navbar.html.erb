@@ -14,7 +14,7 @@
 
           <%= form_tag search_path, class: "navbar-form navbar-left", method: :get do %>
             <div class="form-group">
-              <%= text_field_tag :search, params[:search], placeholder: "Waar ga je trainen?", class: "form-control" %>
+              <%= text_field_tag :search, params[:search], placeholder: "Waar ga jij trainen?", class: "form-control" %>
             </div>
           <% end %>
 
@@ -32,9 +32,9 @@
 
                 <ul class="dropdown-menu">
                   <li><%= link_to "Jouw trainingen", trainings_path %></li>
-                  <li><%= link_to "Jouw sessies", thrills_path %></li>
-                  <li><%= link_to "Jouw trainingen to do", your_trips_path %></li>
-                  <li><%= link_to "Edit Profile", edit_user_registration_path %></li>
+                  <li><%= link_to "Trainingen te geven", thrills_path %></li>
+                  <li><%= link_to "Trainingen te doen", your_trips_path %></li>
+                  <li><%= link_to "Bewerk Profiel", edit_user_registration_path %></li>
                   <li role="separator" class="divider"></li>
                   <li><a href="#">Account setting</a></li>
                   <li><%= link_to "Log out", destroy_user_session_path, method: :delete %></li>

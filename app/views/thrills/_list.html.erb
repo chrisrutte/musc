@@ -3,9 +3,11 @@
 			<div class="panel-heading">
 				Aankomende trainingen door jou </div>
 			<div class="panel-body">
+				<% if @current_user.thrills.where('? <= thrilldate', Date.today).length == 0 %>Je hebt nog geen datums voor je trainingen. Voeg de datums hier toe!
+				<% end %>
 				<% current_user.thrills.order("thrilldate ASC").where('? <= thrilldate', Date.today).each do |thrill| %>
 					<div class="row">
-						<div class="col-md-3">
+						<div class="col-md-2">
 							<%= thrill.thrilldate%>
 						</div>
 						<div class="col-md-4">
@@ -17,9 +19,9 @@
 						<div class="col-md-2">
 							<%= link_to "Deelnemers", thrill %>
 						</div>
-						<div class="col-md-1">
+						<div class="col-md-2">
 							<% if thrill.reservations.length == 0 %>
-								<%= link_to "Delete", [thrill] , method: :delete, data: {confirm: "Zeker weten?"} %>
+								<%= link_to "Verwijder", [thrill] , method: :delete, data: {confirm: "Zeker weten?"} %>
 							<% end %>
 
 						</div>

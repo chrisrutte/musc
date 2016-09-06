@@ -42,7 +42,7 @@ gem 'omniauth-facebook', '~> 4.0'
 gem 'paperclip'
 gem 'aws-sdk', '~> 2.3'
 
-gem "figaro"
+gem 'figaro'
 
 gem 'geocoder'
 

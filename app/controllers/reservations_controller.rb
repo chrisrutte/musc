@@ -28,7 +28,7 @@ class ReservationsController < ApplicationController
 	end
 
 	def your_trips
-		@reservations = current_user.reservations
+		@reservations = current_user.reservations.joins(:thrill).order('thrills.thrilldate asc').where('? <= thrills.thrilldate', Date.today)
 	end
 
 	def your_reservations
