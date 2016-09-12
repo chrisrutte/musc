@@ -30,6 +30,13 @@
 					<%= f.text_field :thrilldate, placeholder: 'Datum', class: 'form-control' %>
 				</div>
 			</div>
+			<div class="col-md-2">
+				<div class="form-group">
+					<%= f.time_field :time, placeholder: 'Tijdstip', id: "time", class: "form-control" %>
+				</div>
+			</div>
+
+			<% if false %>
 
 			<div class="col-md-2">
 				<div class="form-group">
@@ -42,6 +49,8 @@
 					<%= f.select :thrillmin, [["0","0"],["5","5"], ["10","10"],["15","15"],["20","20"],["25","25"],["30","30"],["35","35"],["40","40"],["45","45"],["50","50"],["55","55"]], id: "thrillmin", prompt: "Min", class: "form-control" %>
 				</div>
 			</div>
+
+			<% end %>
 
 			<div class="col-md-2">
 				<div class="actions">

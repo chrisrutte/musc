@@ -3,18 +3,22 @@
 
 <%= link_to "Sign In with Facebook", user_facebook_omniauth_authorize_path, class:  "btn btn-primary" %>
 
-<h2>Sign up</h2>
+<h2>Sign up en begin vandaag</h2>
+<br>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
     <%= render 'shared/devisemes' %>
 
   <div class="form-group">
-    <%= f.text_field :fullname, :class => 'form-control', :placeholder => 'Full name', autofocus: true %>
+    <%= f.text_field :fullname, :class => 'form-control', :placeholder => 'Volledige naam', autofocus: true %>
   </div>
 
   <div class="form-group">
-
     <%= f.email_field :email, :class => 'form-control', :placeholder => 'Email' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.text_field :phone_number, :placeholder => "Telefoonnummer (alleen te zien voor jouw trainers en trainees)", :class => 'form-control' %>
   </div>
 
   <div class="form-group">
@@ -22,6 +26,10 @@
       <en>(<% @minimum_password_length %> characters minimum)</en>
       <% end %>
     <%= f.password_field :password, autocomplete: "off", :class => 'form-control', :placeholder => 'Password' %>
+  </div>
+
+  <div class="form-group">
+    <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Password opnieuw", :class => 'form-control' %>
   </div>
 
 

@@ -20,7 +20,7 @@
 				<% @reservations.each do |reservation| %>
 					<div class="row">
 						<div class="col-md-2">
-							<%= reservation.thrill.thrilldate.strftime('%v') %>
+							<%= reservation.thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= reservation.thrill.time.strftime("%H:%M") %>
 						</div>
 						<div class="col-md-2">
 							<%= link_to training_path(reservation.thrill.training) do %>
@@ -32,12 +32,17 @@
 							<% reservation.thrill.training.tr_name %>
 							<% end %>
 						</div>
-						<div class="col-md-2">
+
+						<div class="col-md-2 text-center">
 							<%= link_to user_path(reservation.thrill.training.user) do %>
-							<%= image_tag avatar_url(reservation.thrill.training.user), class: "img-circle avatar-medium" %>
+							<%= image_tag avatar_url(reservation.thrill.training.user), class: "img-circle avatar-medium" %><br>
 							<%= reservation.thrill.training.user.fullname %>
 							<% end %>
 						</div>
+						<div class="col-md-2">
+							<%= reservation.thrill.training.user.phone_number %>
+						</div>
+						
 						<% if false %>
 						<div class="col-md-2 right">
 							<h4>€ <%= reservation.thrill.training.tr_price %></h4>

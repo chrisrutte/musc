@@ -7,7 +7,15 @@
 		</ul>
 	</div>
 
+	<div class="col-md-9 text-center">
+
+			<%= link_to "Voeg datums toe aan je trainingen", thrills_path, class: "btn btn-primary" %>
+			<br><br>
+	</div>
+
 	<div class="col-md-9">
+
+	
 		<div class="panel panel-default">
 			<div class="panel-heading">
 				Trainingen die jij geeft </div>
@@ -23,15 +31,13 @@
 						<div class="col-md-2">
 							<%= image_tag training.photos[0].image.url(:thumb) if training.photos.length > 0 %>
 						</div>
-						<div class="col-md-6">
-							<h4><%= link_to training.tr_name, training %></h4>
+						<div class="col-md-8">
+							<h4><%= link_to training.tr_name, training %></h4><% if training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %> (geen datums in de toekomst)<% end %>
 						</div>
 						<div class="col-md-2">
 							<%= link_to "Update", edit_training_path(training), class: "btn btn-primary" %>
 						</div>
-						<div class="col-md-2">
-							<%= link_to "Datums", thrills_path, class: "btn btn-primary" %>
-						</div>						
+					
 
 					</div>
 					<hr>

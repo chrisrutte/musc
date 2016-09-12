@@ -6,8 +6,14 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
+
+
 # tip van stackoverflow maar lijkt niet echt te werken
 # config.serve_static_assets = true
+
+
+#tip van een site om geen problemen te krijgen met timezones
+# config.active_record.default_time_zone = "UTC"
 
 module Musc
   class Application < Rails::Application

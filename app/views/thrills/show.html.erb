@@ -10,7 +10,7 @@
 	<div class="col-md-9">
 		<div class="panel panel-default">
 			<div class="panel-heading">
-				Deelnemers voor <%= @thrill.training.tr_name %> <%= @thrill.thrilldate %> <%= @thrill.reservations.length %> / <%= @thrill.training.tr_max_attendants %></div>
+				Deelnemers voor <%= @thrill.training.tr_name %> - <%= @thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= @thrill.reservations.length %> / <%= @thrill.training.tr_max_attendants %></div>
 
 			<div class="panel-body">
 

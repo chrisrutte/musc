@@ -8,7 +8,7 @@
   </div>
   <div class="col-md-9 text-center">
     <div class="panel panel-default">
-      <div class="panel-heading">Your Profile</div>
+      <div class="panel-heading">Jouw profiel</div>
         <div class="panel-body">
           <div class="container">
 
@@ -27,12 +27,11 @@
 
               <div class="form-group">
 
-                <%= f.text_field :phone_number, :placeholder => "Phone Number", :class => 'form-control' %>
+                <%= f.text_field :phone_number, :placeholder => "Telefoonnummer (alleen te zien door trainers en jouw trainees", :class => 'form-control' %>
               </div>
 
               <div class="form-group">
-
-                <%= f.text_area :description, rows:5, cols: 25, :placeholder => "Description", :class => 'form-control' %>
+                <%= f.text_area :description, rows:5, cols: 25, :placeholder => "Omschrijf je zelf", :class => 'form-control' %>
               </div>
 
               <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -41,16 +40,23 @@
 
               <div class="form-group">
 
-                <%= f.password_field :password, autocomplete: "off", :placeholder => "New Password (leave blank if you don't want to change it", :class => 'form-control' %>
+                <%= f.password_field :password, autocomplete: "off", :placeholder => "Nieuw Password (laat leeg als je je password niet wilt aanpassen", :class => 'form-control' %>
 
               </div>
 
               <div class="form-group">
 
-                <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Confirm password", :class => 'form-control' %>
+                <%= f.password_field :password_confirmation, autocomplete: "off", :placeholder => "Typ je nieuwe password opnieuw", :class => 'form-control' %>
               </div>
 
-              <div class="form-group">
+              <div class="row">
+                <div class="col-md-9 text-left">
+                  <%= image_tag avatar_url(@user), class: "img-circle avatar-medium" %>
+                  Avatar veranderen? Ga naar <%= link_to "http://nl.gravatar.com" do %>Gravatar<% end %>
+                </div>
+              </div>
+
+              <br>
 
               <div class="actions">
                 <%= f.submit "Save", :class => "btn btn-primary" %>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160822074032) do
+ActiveRecord::Schema.define(version: 20160911084413) do
 
   create_table "add_new_fields_to_reviews", force: :cascade do |t|
     t.integer  "user_id"
@@ -75,6 +75,7 @@ ActiveRecord::Schema.define(version: 20160822074032) do
     t.integer  "thrillmin"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.time     "time"
     t.index ["training_id"], name: "index_thrills_on_training_id"
   end
 
@@ -85,13 +86,13 @@ ActiveRecord::Schema.define(version: 20160822074032) do
     t.string   "tr_location"
     t.string   "tr_time"
     t.integer  "tr_max_attendants"
-    t.integer  "tr_price"
+    t.decimal  "tr_price",          precision: 5, scale: 2
     t.integer  "tr_duration"
     t.string   "tr_gender"
     t.boolean  "tr_active"
     t.integer  "user_id"
-    t.datetime "created_at",        null: false
-    t.datetime "updated_at",        null: false
+    t.datetime "created_at",                                null: false
+    t.datetime "updated_at",                                null: false
     t.string   "tr_name"
     t.float    "latitude"
     t.float    "longitude"

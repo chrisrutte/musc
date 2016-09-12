@@ -4,7 +4,13 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable
 
-  validates :fullname, presence: true, length: {maximum: 50}       
+#  validates :password, presence: { message: "Vul een password in"}
+#  validates :password_confirmation, presence: { message: "Vul je password opnieuw in"}
+  validates :fullname, presence: true, length: {maximum: 50}
+  validates :phone_number, 
+            presence: { message: "Vul een telefoonnummer in" },
+            length: { minimum: 10, maximum: 15, message: "Telefoonnummer: Vul 10 cijfers in" },
+            numericality: { only_integer: true, message: "Telefoonnummer: Vul enkel cijfers in" }         
 
   has_many :trainings
   has_many :thrills, through: :trainings

@@ -8,7 +8,7 @@
 				<% current_user.thrills.order("thrilldate ASC").where('? <= thrilldate', Date.today).each do |thrill| %>
 					<div class="row">
 						<div class="col-md-2">
-							<%= thrill.thrilldate%>
+							<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %> 
 						</div>
 						<div class="col-md-4">
 							<%= thrill.training.tr_name %>

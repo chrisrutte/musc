@@ -25,12 +25,15 @@ before_action :set_thrill!, only: [:show, :edit, :update, :destroy]
 		
 		if @thrill.save
 #			redirect_to thrills_path
-			flash[:notice] = "De thrill is toegevoegd"
+			flash[:notice] = "De datum is toegevoegd"
 
 			respond_to :js
 		
 		else
-			render :new
+#			redirect_to thrills_path, notice: "Niet opgeslagen"
+
+		    flash[:notice] = "Niet opgeslagen. Sommige velden zijn niet goed ingevuld" 
+			render :index
 		end
 
 	end
@@ -67,10 +70,12 @@ before_action :set_thrill!, only: [:show, :edit, :update, :destroy]
 	def edit
 	end
 
+# deze functie gebruiken we als het goed is niet
 	def update
 		if @thrill.update(thrill_params)
 			redirect_to @thrill
 		else
+	        flash[:notice] = "Niet opgeslagen. Sommige velden zijn niet goed ingevuld" 
 			render :edit
 		end
 	end
@@ -80,7 +85,7 @@ before_action :set_thrill!, only: [:show, :edit, :update, :destroy]
 		@training = @thrill.training
 		@thrill.destroy
 
-		redirect_to thrills_path, notice: "De thrill is verwijderd"
+		redirect_to thrills_path, notice: "De datum is verwijderd"
 	end
 
 	private
@@ -95,7 +100,7 @@ before_action :set_thrill!, only: [:show, :edit, :update, :destroy]
 	end
 
 	def thrill_params
-		params.require(:thrill).permit(:thrilldate, :thrillhr, :thrillmin, :training_id)
+		params.require(:thrill).permit(:thrilldate, :thrillhr, :thrillmin, :time, :training_id)
 	end
 	
 end

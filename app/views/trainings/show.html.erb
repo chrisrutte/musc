@@ -74,10 +74,13 @@
 
 					<div class="panel-body">
 
+						<% if @training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %>
+						Er staan helaas geen datums gepland voor deze training <% end %>
+
 						<% @thrills.where('? <= thrilldate', Date.today).each do |thrill| %>
 							<div class="row">
 								<div class="col-md-5">
-									<%= thrill.thrilldate.strftime("%a %e %b '%y") %> <%= thrill.thrillhr %>:<%= thrill.thrillmin %>
+									<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %>
 								</div>
 								<div class="col-md-2">
 									<%= thrill.reservations.length %> / <%= thrill.training.tr_max_attendants %>
