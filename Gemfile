@@ -31,7 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # gem 'capistrano-rails', group: :development
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '>= 3.2'
-gem 'devise', '4.2.0'
+gem 'devise', '~> 4.2'
 gem 'coffee-script-source', '1.8.0'
 gem 'toastr-rails'
 
@@ -43,6 +43,8 @@ gem 'paperclip'
 gem 'aws-sdk', '~> 2.3'
 
 gem 'figaro'
+
+gem 'sendgrid-rails', '~> 2.0', '>= 2.0.5' 
 
 gem 'geocoder'
 

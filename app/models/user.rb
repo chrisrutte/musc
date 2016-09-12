@@ -1,8 +1,8 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and 
+  # , :lockable, :timeoutable and 
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable
+         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :confirmable
 
 #  validates :password, presence: { message: "Vul een password in"}
 #  validates :password_confirmation, presence: { message: "Vul je password opnieuw in"}

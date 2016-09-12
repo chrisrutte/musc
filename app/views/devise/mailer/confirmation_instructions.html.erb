@@ -1,5 +1,5 @@
-<p>Welcome <%= @email %>!</p>
+<p>Welkom <%= @email %>!</p>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Top dat je gebruik gaat maken van Musc. Klik op onderstaande link om je e-mailadres te bevestigen. Succes met je eerste training!</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to 'Bevestig e-mailadres', confirmation_url(@resource, confirmation_token: @token) %></p>

@@ -27,7 +27,7 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.raise_delivery_errors = false
+  config.action_mailer.raise_delivery_errors = true
 
   config.action_mailer.perform_caching = false
 
@@ -82,7 +82,18 @@ Rails.application.configure do
   }
 
   config.i18n.default_locale = :nl
-  config.active_record.default_time_zone = "UTC"
+#  config.active_record.default_time_zone = "UTC"
+
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    enable_starttls_auto: true,
+    user_name: ENV["YOUR_SENDGRID_USERNAME"],
+    password: ENV["YOUR_SENDGRID_PASSWORD"],
+    domain: 'localhost',
+    authentication: 'plain'
+}
 
 end
 
