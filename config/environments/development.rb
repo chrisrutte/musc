@@ -91,7 +91,8 @@ Rails.application.configure do
     enable_starttls_auto: true,
     user_name: ENV["YOUR_SENDGRID_USERNAME"],
     password: ENV["YOUR_SENDGRID_PASSWORD"],
-    domain: 'localhost',
+#    domain: 'localhost',
+    domain: 'https://whispering-garden-94462.herokuapp.com'
     authentication: 'plain'
 }
 
