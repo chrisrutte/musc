@@ -52,7 +52,7 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   # config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  config.action_mailer.default_url_options = { host: 'herokuapp.com' }
 
 #  config.reload_classes_only_on_change = false
 #  toegevoegd met heroku gepiel
@@ -92,9 +92,11 @@ Rails.application.configure do
     user_name: ENV["YOUR_SENDGRID_USERNAME"],
     password: ENV["YOUR_SENDGRID_PASSWORD"],
 #    domain: 'localhost',
-    domain: 'heroku.com',
+    domain: 'herokuapp.com',
     authentication: 'plain'
 }
+
+
 
 end
 

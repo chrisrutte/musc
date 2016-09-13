@@ -104,6 +104,22 @@ Rails.application.configure do
   #  s3_host_name: 's3-eu-central-1.amazonaws.com',
   }
 
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+    address: 'smtp.sendgrid.net',
+    port: 587,
+    enable_starttls_auto: true,
+    user_name: ENV["YOUR_SENDGRID_USERNAME"],
+    password: ENV["YOUR_SENDGRID_PASSWORD"],
+#    domain: 'localhost',
+    domain: 'herokuapp.com',
+    authentication: 'plain'
+}
+
+  config.action_mailer.default_url_options = { host: 'herokuapp.com' }
+
+  config.i18n.default_locale = :nl
+
 
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
