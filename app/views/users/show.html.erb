@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col-md-3">
 		<div class="center">
-			<%= image_tag avatar_url(@user), class: "avatar-full" %>
+			<%= image_tag avatar_url(@user), class: "avatar-full img-circle" %>
 			<% if current_user != @user %>
 			<div class="row-space-2">
 				<%= link_to "Send Message", conversations_path(sender_id: current_user.id, recipient_id: @user.id), method: 'post', class: "btn btn-primary wide" %>
@@ -31,10 +31,8 @@
 			<% @trainings.each do |training| %>
 			<div class="col-md-4">
 				<div class="panel panel-default">
-					<div class="panel-heading preview">
-						
+					<div class="panel-heading preview">			
 						<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
-						
 					</div>
 					<div class="panel-body">
 						<%= link_to training.tr_name, training %>

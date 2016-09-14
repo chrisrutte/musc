@@ -2,46 +2,101 @@
 	<div class="panel-body">
 
 		<!-- Image -->
+		<% if false %>
 		<div class="row">
 			<div class="col-md-12">
 				<%= image_tag @photos[0].image.url(), class: "img-responsive" if @photos.length > 0 %>
 			</div>
 		</div>
+		<% end %>
 
+		<!-- Foto Caroussel -->
+		<% if @photos.length > 0 %>
+		<div class="row">
+			<div class="col-md-12">
+
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				  <!-- Indicators -->
+				<% if @photos %>
+				  <ol class="carousel-indicators">
+				  	<% @photos.each do |photo| %>
+				    <li data-target="#myCarousel" data-slide-to="<% photo.id %>"></li>
+				    <% end %>
+				  </ol>
+				  <% end %>
+
+				  <!-- Wrapper for slides -->
+				  <div class="carousel-inner" role="listbox">
+				  	<% if @photos %>
+				  	<% @photos.each do |photo| %>
+					  	    <div class="item <%= 'active' if photo.id == @photos[0].id %>">
+					      		<%= image_tag photo.image.url() %>
+					       	</div>
+					    <% end %>
+				    <% end %>
+				  </div>
+
+				  <!-- Left and right controls -->
+				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+				    <span class="sr-only">Previous</span>
+				  </a>
+				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+				    <span class="sr-only">Next</span>
+				  </a>
+				</div>
+			</div>
+		</div>
+		<% end %>
 		<br>
 
 		<!-- Main Intro -->
 		<div class="row">
-			<div class="col-md-8">
+			<div class="col-md-12">
 				<div class="row">
-					<div class="col-md-3 text-center">
-						<%= image_tag avatar_url(@training.user), class: "img-circle avatar-large" %><br><br>
+					<div class="col-md-2 text-center">
+						<%= image_tag avatar_url(@training.user), class: "img-circle avatar-large" %><br>
 						<%= @training.user.fullname %>
 					</div>
-					<div class="col-md-9">
-						<h4><%= @training.tr_name %></h4>
+					<div class="col-md-10">
+						<h4><%= @training.tr_name %></h4><span id="average_rating"></span> (<%= @reviews.count %>)<br>
 						<%= @training.tr_location %>
+						<br><br>
 						<div class="row text-center row-space-1">
-							<div class="col-sm-3">
-								<i class="fa fa-home fa-2x"></i>
+							<div class="col-md-2">
+								<% if @training.tr_gender == 'Dudes' %><i class="fa fa-mars fa-3x"></i><% end %>
+								<% if @training.tr_gender == 'Chicks' %><i class="fa fa-venus fa-3x"></i><% end %> 
+								<% if @training.tr_gender == 'Allebei' %><i class="fa fa-transgender fa-3x"></i><% end %> 
 							</div>
-
-							<div class="col-sm-3">
-								<i class="fa fa-bed fa-2x"></i>
+							<div class="col-md-2">
+								<i class="fa fa-users fa-3x"></i>
 							</div>
-							<div class="col-sm-3">
-								<i class="fa fa-clock-o fa-2x"></i>
-							</div>							
+							<div class="col-md-2">
+								<i class="fa fa-clock-o fa-3x"></i>
+							</div>
+							<div class="col-md-2">
+								<i class="fa fa-eur fa-3x"></i>
+							</div>
+							<div class="col-md-2">
+								<i class="fa fa-star-o fa-3x"></i>
+							</div>								
 						</div>
 						<div class="row text-center">
-							<div class="col-sm-3">
-								<%= @training.tr_intensity %>
+							<div class="col-md-2">
+								<%= @training.tr_gender %>
 							</div>
-							<div class="col-sm-3">
-								<%= @training.tr_max_attendants %> <%= @training.tr_max_attendants > 1? "Deelnemers" : "Deelnemer" %>
+							<div class="col-md-2">
+								Max <%= @training.tr_max_attendants %> 
 							</div>
-							<div class="col-sm-3">
+							<div class="col-md-2">
 								<%= @training.tr_duration %> min
+							</div>
+							<div class="col-md-2">
+								<%= number_to_currency(@training.tr_price, unit: '€') %>
+							</div>
+							<div class="col-md-2">
+								<%= @training.average_rating.round(2) %> (<%= @reviews.count %>)
 							</div>
 						</div>
 					</div>
@@ -62,9 +117,9 @@
 				<p><%= @training.tr_description %></p>
 			</div>
 		</div>
+		<br>
 
 		<!-- Reserveringen -->
-		<h3>Datums</h3>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="panel panel-default">
@@ -98,7 +153,7 @@
 									<% end %>
 								</div>
 								<div class="col-md-2">
-									€ <%= thrill.training.tr_price %>
+									<%= number_to_currency(@training.tr_price, unit: '€') %>
 								</div>
 							</div>
 							<hr>
@@ -180,45 +235,8 @@
 			<% end %>
 		</div>
 
-		<!-- Foto Caroussel -->
-		<h3>Foto's</h3>
-		<div class="row">
-			<div class="col-md-12">
 
-				<div id="myCarousel" class="carousel slide" data-ride="carousel">
-				  <!-- Indicators -->
-				<% if @photos %>
-				  <ol class="carousel-indicators">
-				  	<% @photos.each do |photo| %>
-				    <li data-target="#myCarousel" data-slide-to="<% photo.id %>"></li>
-				    <% end %>
-				  </ol>
-				  <% end %>
 
-				  <!-- Wrapper for slides -->
-				  <div class="carousel-inner" role="listbox">
-				  	<% if @photos %>
-				  	<% @photos.each do |photo| %>
-					  	    <div class="item <%= 'active' if photo.id == @photos[0].id %>">
-					      		<%= image_tag photo.image.url() %>
-					       	</div>
-					    <% end %>
-				    <% end %>
-				  </div>
-
-				  <!-- Left and right controls -->
-				  <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-				    <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-				    <span class="sr-only">Previous</span>
-				  </a>
-				  <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-				    <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-				    <span class="sr-only">Next</span>
-				  </a>
-				</div>
-
-			</div>
-		</div>
 	</div>
 </div>
 

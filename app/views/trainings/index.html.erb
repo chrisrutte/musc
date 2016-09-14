@@ -7,11 +7,14 @@
 		</ul>
 	</div>
 
+	<% if @trainings.length > 0 %>
 	<div class="col-md-9 text-center">
 
-			<%= link_to "Voeg datums toe aan je trainingen", thrills_path, class: "btn btn-primary" %>
+
+			<%= link_to "Voeg datums toe aan je trainingen", thrills_path, class: "btn btn-primary wide" %>
 			<br><br>
 	</div>
+	<% end %>
 
 	<div class="col-md-9">
 
@@ -23,7 +26,7 @@
 			<div class="panel-body">
 
 
-				<% if @trainings.length == 0 %>Je hebt nog geen trainingen om te geven aangemaakt. <%= link_to "Word trainer!", new_training_path %>
+				<% if @trainings.length == 0 %>Je hebt nog geen trainingen aangemaakt. <%= link_to "Word trainer!", new_training_path %>
 				<% end %>
 
 				<% @trainings.each do |training| %>
@@ -32,7 +35,7 @@
 							<%= image_tag training.photos[0].image.url(:thumb) if training.photos.length > 0 %>
 						</div>
 						<div class="col-md-8">
-							<h4><%= link_to training.tr_name, training %></h4><% if training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %> (geen datums in de toekomst)<% end %>
+							<h4><%= link_to training_path(training) do %><%= training.tr_name %><% end %></h4><% if training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %> (geen datums in de toekomst)<% end %>
 						</div>
 						<div class="col-md-2">
 							<%= link_to "Update", edit_training_path(training), class: "btn btn-primary" %>

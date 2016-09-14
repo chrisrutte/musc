@@ -9,18 +9,19 @@
 
       <div class="form-group">
 
-        <%= f.password_field :password, autofocus: true, autocomplete: "off", class => "form-control", :placeholder => "New Password" %>
+        <%= f.password_field :password, autofocus: true, autocomplete: "off", :class => "form-control", :placeholder => "New Password" %>
       </div>
 
       <div class="form_group">
 
-        <%= f.password_field :password_confirmation, autocomplete: "off", class => "form-control", :placeholder => "Confirm New Password"  %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", :class => "form-control", :placeholder => "Confirm New Password" %>
       </div>
 
+      <br>
 
         <%= f.submit "Change my password" %>
-      </div>    <% end %>
-
+      </div>    
+    <% end %>
   </div>
 </div>
 
