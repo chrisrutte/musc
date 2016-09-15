@@ -120,8 +120,10 @@
 				<% @arrTrainings.each do |training| %>
 					<div class="col-md-4">
 						<div class="panel panel-default">
-							<div class="panel-heading preview">
+							<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
+								<% if false %>
 								<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
+								<% end %>
 							</div>
 							<div class="panel-body">
 								<%= link_to training.tr_name, training %>

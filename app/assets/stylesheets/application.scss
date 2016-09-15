@@ -73,6 +73,8 @@ body {
 	margin-bottom: 24px;
 }
 
+
+
 .description {
 	color: #575757;
 	font-size: 15px;
@@ -216,12 +218,20 @@ input [type=time] {
 }
 
 .panel-heading.preview {
-	padding: 0;
-
+	padding-top: 75%;
+	width: 100%;
+	overflow: hidden;
+	background-size: cover;
+	background-position: 50% 50%;
 }
 
 .panel-heading.preview img {
 	width: 100%;
+}
+
+.panel-body {
+	vertical-align: middle;
+
 }
 
 .reservation-table td {
@@ -277,3 +287,14 @@ input [type=time] {
   vertical-align: middle;
   display: table-cell;
 }
+
+.crop {
+ padding-top: 40%;
+ width: 100%;
+ overflow: hidden;
+ background-size: cover;
+ background-position: 50% 50%;
+}
+
+
+

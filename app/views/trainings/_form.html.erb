@@ -91,10 +91,10 @@
 
 				<div class="col-md-4">
 					<div class="form-group">
-						<label>Prijs per deelnemer per training</label>
+						<label>Prijs per deelnemer per training</label> <i class = "fa fa-info-circle fa-lg" id="price_condition"></i>
 						<div class="input-group">
 							<div class="input-group-addon">€</div>
-						<%= f.text_field :tr_price, placeholder: "bv. € 5.50", class: "form-control" %>
+							<%= f.text_field :tr_price, placeholder: "bv. 5.50", class: "form-control" %>
 						</div>
 					</div>
 				</div>
@@ -129,3 +129,18 @@
 		</div>
 	</div>
 </div>
+
+<script>
+$('#price_condition').mouseenter(function(){
+    $('body').append("<div id='hoveringTooltip' style='position:absolute;'></div>");
+    $('#hoveringTooltip').html("Jij krijgt 80% van dit bedrag op je rekening gestort");
+    $('#hoveringTooltip').css({
+        "top" : $(this).offset().top + 0,
+        "left" : $(this).offset().left + 40
+    });
+});
+$('#price_condition').mouseleave(function(){
+    $('#hoveringTooltip').remove();
+});
+
+</script>

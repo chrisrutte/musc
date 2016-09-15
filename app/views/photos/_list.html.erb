@@ -4,8 +4,10 @@
 		<% @photos.each do |photo| %>
 		<div class="col-md-4">
 			<div class="panel panel-default">
-				<div class="panel-heading preview">
+				<div class="panel-heading preview" style="background-image: url('<%= photo.image.url(:medium) %>')">
+					<% if false %>
 					<%= image_tag photo.image.url(:medium) %>
+					<% end %>
 				</div>
 				<div class="panel-body">
 					<span class="pull-right">
