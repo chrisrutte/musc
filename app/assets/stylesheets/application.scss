@@ -5,7 +5,7 @@
 body {
 	color:565a5c;
 	background-color: #F8F8F8;
-
+	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
 }
 
 .container {
@@ -19,7 +19,8 @@ body {
 .navbar-default .navbar-brand {
 	color: #FF5A5F;
 	font-size: 2em;
-	font-weight: 400;
+	font-weight: 700;
+    text-transform: uppercase;
 }
 
 .btn-primary.btn {
@@ -289,12 +290,9 @@ input [type=time] {
 }
 
 .crop {
- padding-top: 40%;
- width: 100%;
- overflow: hidden;
- background-size: cover;
- background-position: 50% 50%;
+  padding-top: 40%;
+  width: 100%;
+  overflow: hidden;
+  background-size: cover;
+  background-position: 50% 50%;
 }
-
-
-
