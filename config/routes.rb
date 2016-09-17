@@ -40,4 +40,6 @@ Rails.application.routes.draw do
 
   get '/search' => 'pages#search'
 
+  get '/homepages/index'
+
 end
