@@ -19,6 +19,16 @@
 </div>
 <% end %>
 
+<div class="row text-center home">
+
+	<h1>Training every body</h1>
+	<p>Geef jouw training of vind jouw training. Bootcamp voor iedereen.</p><br>
+	<%= link_to "Begin meteen", new_user_registration_path, class: "btn btn-primary" %>
+
+</div>
+
+<br>
+
 <br>
 
 <div class="row">
@@ -26,6 +36,7 @@
 	<div class="col-md-4">
 		<div class="panel panel-default">
 			<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
+				<div class="label label-danger price"><%= number_to_currency(training.tr_price, unit: '€') %></div>
 				<% if false %>
 				<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
 				<% end %>
@@ -38,6 +49,115 @@
 
 	<% end %>
 </div>
+
+
+
+<div class="row text-center home">
+	<h1>Bootcampers</h1>
+	<p>Doe de training die past bij jou</p>
+    <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-puzzle-piece fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">De training die perfect bij jou past</h4>
+        <p class="text-muted">Het aanbod is groot, jij kiest de training die jou motiveert
+		</p>
+    </div>
+    <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-star-o fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Jij beoordeelt, wij verbeteren</h4>
+        <p class="text-muted">Jij beoordeelt elke training anoniem, zo doet jouw trainer het volgende keer nog beter</p>
+    </div>
+    <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-sign-in fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Geen abonnementen of strippenkaarten</h4>
+        <p class="text-muted">Je betaalt per keer een laag bedrag en zit nergens aan vast
+		</p>
+    </div>
+</div>
+
+<hr>
+
+<div class="row text-center home">
+	<h1>Trainers</h1>
+	<p>Bied jouw training aan, op jouw manier</p>
+    <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-rocket fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Alle vrijheid</h4>
+        <p class="text-muted">Jij bepaalt wanneer, waar en welke training je wilt geven. Maak het zo mooi als je zelf wilt!
+	</p>
+    </div>
+    <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-file-text-o fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Geen gedoe</h4>
+        <p class="text-muted">Wij houden jouw administratie bij, zodat jij je volledig kan focussen op je training
+	</p>
+    </div>
+    <div class="col-md-4">
+        <span class="fa-stack fa-4x">
+            <i class="fa fa-circle fa-stack-2x text-primary"></i>
+            <i class="fa fa-eur fa-stack-1x fa-inverse"></i>
+        </span>
+        <h4 class="service-heading">Verdien per deelnemer</h4>
+        <p class="text-muted">Jij krijgt wekelijks de inkomsten van jouw trainingen op je rekening gestort
+		</p>
+    </div>
+</div>
+<br><br><br>
+
+<footer>
+	<div class="container">
+		<div class="row">
+			<div class="col-sm-2">
+			<h6>Copyright &copy; 2016 MUSC</h6>
+			</div><!-- end col-sm-2 -->
+			
+			<div class="col-sm-4">
+				<h6>About Us</h6>
+				<p></p>
+			</div><!-- end col-sm-4 -->
+			
+			<div class="col-sm-2">
+				<h6>Navigation</h6>
+				<ul class="unstyled">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Services</a></li>
+					<li><a href="#">Links</a></li>
+					<li><a href="#">Contact</a></li>
+				</ul>
+			</div><!-- end col-sm-2 -->
+
+			<div class="col-sm-2">
+				<h6></h6>
+			</div><!-- end col-sm-2 -->
+
+			<div class="col-sm-2">
+				<h6>Links</h6>
+				<ul class="unstyled">
+					<li><a href="#">Voorwaarden</a></li>
+					<li><a href="#">Help</a></li>
+					<li><a href="#">Over ons</a></li>
+					<li><a href="#">Contact</a></li>					
+				</ul>
+			</div><!-- end col-sm-2 -->
+			
+
+		</div><!-- end row -->
+	</div><!-- end container -->
+</footer>
 
 
 <script>
