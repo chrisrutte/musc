@@ -19,44 +19,6 @@ ActiveRecord::Schema.define(version: 20160927160602) do
     t.datetime "updated_at",   null: false
   end
 
-  create_table "how_to_content_translations", force: :cascade do |t|
-    t.integer  "how_to_content_id"
-    t.string   "locale"
-    t.string   "title"
-    t.text     "description"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "how_to_contents", force: :cascade do |t|
-    t.integer  "section_id"
-    t.integer  "position",   default: 0
-    t.boolean  "active",     default: true
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "how_to_section_translations", force: :cascade do |t|
-    t.integer  "how_to_section_id"
-    t.string   "locale"
-    t.string   "name"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "how_to_sections", force: :cascade do |t|
-    t.integer  "parent_id"
-    t.boolean  "active",             default: true
-    t.integer  "sub_sections_count", default: 0
-    t.integer  "contents_count",     default: 0
-    t.integer  "position",           default: 0
-    t.integer  "lft"
-    t.integer  "rgt"
-    t.integer  "depth"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "messages", force: :cascade do |t|
     t.text     "content"
     t.integer  "conversation_id"
@@ -90,10 +52,10 @@ ActiveRecord::Schema.define(version: 20160927160602) do
 
   create_table "reviews", force: :cascade do |t|
     t.text     "comment"
-    t.integer  "star"
+    t.integer  "star",        default: 1
     t.integer  "training_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
     t.integer  "user_id"
     t.index ["training_id"], name: "index_reviews_on_training_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
@@ -128,16 +90,6 @@ ActiveRecord::Schema.define(version: 20160927160602) do
     t.float    "latitude"
     t.float    "longitude"
     t.index ["user_id"], name: "index_trainings_on_user_id"
-  end
-
-  create_table "trsessions", force: :cascade do |t|
-    t.integer  "training_id"
-    t.date     "tr_date"
-    t.integer  "tr_timehrs"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "tr_timemin"
-    t.index ["training_id"], name: "index_trsessions_on_training_id"
   end
 
   create_table "users", force: :cascade do |t|

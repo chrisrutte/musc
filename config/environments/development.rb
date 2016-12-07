@@ -58,7 +58,9 @@ Rails.application.configure do
 #  toegevoegd met heroku gepiel
   config.middleware.delete Rack::Lock
 
-  Paperclip.options[:command_path] = 'C:/GnuWin32/bin; C:/ImageMagick'
+
+
+#  Paperclip.options[:command_path] = 'C:/GnuWin32/bin; C:/ImageMagick'
 #  Paperclip.options[:swallow_stderr] = false
 
 
@@ -66,9 +68,9 @@ Rails.application.configure do
 #  Paperclip::Attachment.default_options[:s3_host_name] = 'muscpics.s3.eu-central-1.amazonaws.com'
 
   config.paperclip_defaults = {
-    storage: :s3,
-    s3_credentials: {
-  #    bucket: ENV["S3_BUCKET_NAME"],
+      storage: :s3,
+      s3_credentials: {
+  #   bucket: ENV["S3_BUCKET_NAME"],
       bucket: 'muscpics',
       access_key_id: ENV["AWS_ACCESS_KEY_ID"],
       secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
