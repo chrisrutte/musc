@@ -10,11 +10,27 @@ class ReservationsController < ApplicationController
 		render json: reservations
 	end
 
+require 'Mollie/API/Client'
 
 	def create
 		@thrill = Thrill.find(params[:thrill_id])
 		if @thrill.reservations.length < @thrill.training.tr_max_attendants
 			@reservation = current_user.reservations.create(reservation_params)
+
+			if @reservation
+
+			    mollie = Mollie::API::Client.new
+			    mollie.setApiKey 'test_gUejkz43UkdeCauC22J6UNqqVRdpwW'
+
+			    payment = mollie.payments.create(
+			        amount: 10.00,
+			        description: 'My first API payment',
+			        redirectUrl: 'http://www.google.com'
+			    )
+
+			    payment = mollie.payments.get(payment.id)
+
+
 			redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
 		else
 			redirect_to @thrill.training, notice: "Helaas, de training is vol"

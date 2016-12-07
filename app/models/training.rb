@@ -4,7 +4,7 @@ class Training < ActiveRecord::Base
 
   belongs_to :user
   has_many :photos
-  has_many :reservations
+  has_many :reservations, through: :thrills
   has_many :reviews
   has_many :thrills
   has_many :users, through: :thrills

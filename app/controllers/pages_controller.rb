@@ -3,6 +3,9 @@ class PagesController < ApplicationController
   	@trainings = Training.limit(3)
   end
 
+  def faq
+  end
+
   def search
 
   	if params[:search].present? && params[:search].strip != ""
@@ -29,22 +32,33 @@ class PagesController < ApplicationController
 
   		@trainings.each do |training|
 
-#     Nog toe te voegen dat volle trainingen niet worden weergegeven
-#     num_thrills = training.thrills.where("(? = thrilldate)" , date).length
-#  		num_thrills = training.thrills.where("(? = thrilldate) AND (? != thrills.reservations.length)", date, training.tr_max_attendants).length
-#     num_full_thrills = training.thrills.where("? = thrill.reservations.length", training.tr_max_attendants).length
+    # check of er datums zijn voor de training in het datumbereik
       num_thrills = training.thrills.where("(? <= thrilldate AND ? >= thrilldate)", startdate, enddate).length
+    # check het totaal aantal reserveringen voor de training in het datumbereik      
+      tot_res = training.reservations.where("(? <= thrills.thrilldate AND ? >= thrills.thrilldate)", startdate, enddate).length
 
-#      training.thrills.joins(:reservations).includes(:reservations).group("thrills.id").select("thrills.*, thrilldate, count(reservations.id) as rescount")
-#      training.thrills.joins(:reservations).select("thrills.*, thrilldate, COUNT(*) AS rescount").group("thrills.id")
-
-
-  			if (num_thrills == 0) 
+    # gooi training eruit als er geen datums beschikbaar zijn in het datumbereik OF als al deze datums vol zitten
+  			if (num_thrills == 0 || num_thrills * training.tr_max_attendants == tot_res) 
   				@arrTrainings.delete(training)
 
   			end
   		end
-  	end
+    end
+
+    if (params[:startdate].blank? & params[:enddate].blank?)
+      todate = Date.today
+
+      @trainings.each do |training|
+
+    # check of er datums gepland staan in de toekomst voor deze training
+      num_thrills = training.thrills.where("(? <= thrilldate)", todate).length
+
+      # gooi training eruit indien er geen datums in de toekomst zijn
+        if (num_thrills == 0) 
+          @arrTrainings.delete(training)
+        end
+      end
+    end  	
   end
 end
 

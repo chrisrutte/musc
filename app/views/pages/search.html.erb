@@ -71,25 +71,14 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<%= f.select :tr_duration_gteq, [["45",45], ["60",60], ["75",75], ["90+",90]], prompt: "Tijdsduur (min)", class: "form-control" %>
+							<%= f.text_field :tr_duration_gteq, placeholder: "Tijdsduur (min)", class: "form-control" %>
 						</div>
 					</div>
 				</div>
 
 
 				<div class="row">
-					<div class="col-md-3">
-						<label>Intensiteit</label>
-					</div>					
-					<div class="col-md-3">
-						<%= check_box_tag "q[tr_intensity_eq_any][]", "Low" %> Low
-					</div>
-					<div class="col-md-3">
-						<%= check_box_tag "q[tr_intensity_eq_any][]", "Medium" %> Medium
-					</div>				
-					<div class="col-md-3">
-						<%= check_box_tag "q[tr_intensity_eq_any][]", "High" %> High
-					</div>
+
 				</div>
 
 				<div class="row">
@@ -139,25 +128,28 @@
 </div>
 
 <script>
-	$(function(){
-
+	$(function() {
 		$("#startdate").datepicker({
 			dateFormat: 'dd-mm-yy',
 			minDate: 0,
-			maxDate: '3m'
+			maxDate: '3m',
+			onSelect: function(selected) {
+				$('#enddate').datepicker("option", "minDate", selected);
+				$('#enddate').attr('disabled', false);
+			}
 		});
-	})
-</script> 
-
-<script>
-	$(function(){
 
 		$("#enddate").datepicker({
 			dateFormat: 'dd-mm-yy',
 			minDate: 0,
-			maxDate: '3m'
+			maxDate: '3m',
+			onSelect: function(selected) {
+				$('#startdate').datepicker("option", "maxDate", selected);
+			}
 		});
 	})
+
+
 </script>
 
 
