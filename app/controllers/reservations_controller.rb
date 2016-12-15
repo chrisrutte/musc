@@ -30,17 +30,18 @@ class ReservationsController < ApplicationController
 
 #			    payment = mollie.payments.get(payment.id)
 #
-			redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
-		else
-			redirect_to @thrill.training, notice: "Helaas, de training is vol"
+				redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
+			else
+				redirect_to @thrill.training, notice: "Helaas, de training is vol"
+			end
 		end
-
+	end
 
 #		@reservation = Reservation.new(reservation_params)
 #		@reservation = @thrill.reservations.new(reservation_params)
 
 		
-	end
+
 
 	def your_trips
 		@reservations = current_user.reservations.joins(:thrill).order('thrills.thrilldate asc').where('? <= thrills.thrilldate', Date.today)
