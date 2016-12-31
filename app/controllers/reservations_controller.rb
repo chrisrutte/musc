@@ -2,6 +2,8 @@ class ReservationsController < ApplicationController
 	before_action :authenticate_user!
 #	before_action :set_thrill
 
+	
+
 	def preload
 		training = Training.find(params[:training_id])
 		today = Date.today
@@ -11,26 +13,32 @@ class ReservationsController < ApplicationController
 	end
 
 # require 'Mollie/API/Client'
+	
+	
 
 	def create
+
+
+
 		@thrill = Thrill.find(params[:thrill_id])
 		if @thrill.reservations.length < @thrill.training.tr_max_attendants
 			@reservation = current_user.reservations.create(reservation_params)
 
 			if @reservation
 
-#			    mollie = Mollie::API::Client.new
-#			    mollie.setApiKey 'test_gUejkz43UkdeCauC22J6UNqqVRdpwW'
+				require 'Mollie/API/Client'
 
-#			    payment = mollie.payments.create(
-#			        amount: 10.00,
-#			        description: 'My first API payment',
-#			        redirectUrl: 'http://www.google.com'
-#			    )
+				mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
+			    
+			    payment = mollie.payments.create(
+			        amount: 10.00,
+			        description: 'My first API payment',
+			        redirect_Url: 'http://localhost:3000'
+			    )
 
-#			    payment = mollie.payments.get(payment.id)
+			    payment = mollie.payments.get(payment.id)
 #
-				redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
+#				redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
 			else
 				redirect_to @thrill.training, notice: "Helaas, de training is vol"
 			end

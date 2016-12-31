@@ -98,7 +98,9 @@ Rails.application.configure do
     authentication: 'plain'
 }
 
-
+# mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
+#  mollie = Mollie::API::Client.new
+#  mollie.api_key =  "test_gUejkz43UkdeCauC22J6UNqqVRdpwW"
 
 end
 
