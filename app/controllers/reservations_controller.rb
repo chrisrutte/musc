@@ -26,19 +26,19 @@ class ReservationsController < ApplicationController
 
 			if @reservation
 
-				require 'Mollie/API/Client'
+#				require 'Mollie/API/Client'
 
-				mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
+#				mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
 			    
-			    payment = mollie.payments.create(
-			        amount: 10.00,
-			        description: 'My first API payment',
-			        redirect_Url: 'http://localhost:3000'
-			    )
+#			    payment = mollie.payments.create(
+#			        amount: 10.00,
+#			        description: 'My first API payment',
+#			        redirect_Url: 'http://localhost:3000'
+#			    )
 
-			    payment = mollie.payments.get(payment.id)
-#
-#				redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
+#			    payment = mollie.payments.get(payment.id)
+
+				redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
 			else
 				redirect_to @thrill.training, notice: "Helaas, de training is vol"
 			end
