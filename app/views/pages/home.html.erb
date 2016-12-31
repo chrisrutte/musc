@@ -26,7 +26,7 @@
 
 	<h1>Training every body</h1>
 	<p>Geef jouw training of vind jouw training. Bootcamp voor iedereen.</p><br>
-	<%= link_to "Begin meteen", new_user_registration_path, class: "btn btn-primary" %>
+	<%= link_to "Meld je meteen aan", new_user_registration_path, class: "btn btn-primary" %>
 
 </div>
 
@@ -45,7 +45,11 @@
 				<% end %>
 			</div>
 			<div class="panel-body">
-				<%= link_to training.tr_name, training %>
+			    <% if(!user_signed_in?) %>
+					<%= training.tr_name %>
+				<% else %>
+					<%= link_to training.tr_name, training %>
+				<% end %>
 			</div>
 		</div>
 	</div>

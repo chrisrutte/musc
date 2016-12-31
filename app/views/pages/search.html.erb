@@ -115,8 +115,12 @@
 								<% end %>
 							</div>
 							<div class="panel-body">
-								<%= link_to training.tr_name, training %>
-								<%= image_tag "star-on.png" %> <%= training.average_rating %> 
+								<% if(!user_signed_in?) %>
+									<%= training.tr_name %>
+								<% else %>
+									<%= link_to training.tr_name, training %>
+								<% end %>
+									<%= image_tag "star-on.png" %> <%= training.average_rating %> 
 							</div>
 						</div>
 					</div>
