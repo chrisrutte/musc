@@ -17,7 +17,7 @@
 	
 
 	<div class="col-md-2 text-center">
-	<%= submit_tag "Search", class: "btn btn-primary" %>
+	<%= submit_tag "Zoek je training", class: "btn btn-primary" %>
 	</div>
 </div>
 <% end %>
@@ -26,7 +26,12 @@
 
 	<h1>Training every body</h1>
 	<p>Geef jouw training of vind jouw training. Bootcamp voor iedereen.</p><br>
-	<%= link_to "Meld je meteen aan", new_user_registration_path, class: "btn btn-primary" %>
+
+	<% if(!user_signed_in?) %>
+		<%= link_to "Meld je meteen aan", new_user_registration_path, class: "btn btn-primary" %>
+	<% else %>
+		<%= link_to "Word trainer", new_training_path, class: "btn btn-primary" %>
+	<% end %>
 
 </div>
 
