@@ -35,8 +35,9 @@
 						        '&description=' + encodeURIComponent('[CONTENT_DESCRIPTION]') +
 						        '&redirect_uri=' + FBVars.baseURL + '[URL_TO_REDIRECT_TO_AFTER_SHARE]' +
 						        '&display=popup';" %>
-						<% end %>
+
 						</div>
+						<% end %>
 						<div class="col-md-2">
 							<% if thrill.reservations.length == 0 %>
 								<%= link_to "Verwijder", [thrill] , method: :delete, data: {confirm: "Zeker weten?"} %>
