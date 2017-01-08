@@ -25,18 +25,17 @@
 							<i class="fa fa-facebook-square 2" aria-hidden="true" id = "share_button"></i>
 						</div>
 						<% end %>
-						
+						<% if false %>
 						<div class="col-md-1">
 							<i class="fa fa-facebook-square 2" aria-hidden="true" id = "share_button"></i>
-							<%= link_to 'Share on Facebook', "http://www.facebook.com/dialog/feed?app_id=1622810844676345' +
-						        '&link=[FULLY_QUALIFIED_LINK_TO_SHARE_CONTENT]' +
+							<%= link_to 'Share on Facebook', "http://www.facebook.com/dialog/feed?app_id=1622810844676345&link=[FULLY_QUALIFIED_LINK_TO_SHARE_CONTENT]' +
 						        '&picture=[LINK_TO_IMAGE]' +
 						        '&name=' + encodeURIComponent('[CONTENT_TITLE]') +
 						        '&caption=' + encodeURIComponent('[CONTENT_CAPTION]) +
 						        '&description=' + encodeURIComponent('[CONTENT_DESCRIPTION]') +
 						        '&redirect_uri=' + FBVars.baseURL + '[URL_TO_REDIRECT_TO_AFTER_SHARE]' +
 						        '&display=popup';" %>
-
+						<% end %>
 						</div>
 						<div class="col-md-2">
 							<% if thrill.reservations.length == 0 %>
