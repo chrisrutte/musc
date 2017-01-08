@@ -19,8 +19,24 @@
 						<div class="col-md-2">
 							<%= link_to "Deelnemers", thrill %>
 						</div>
+
+						<% if false %>
 						<div class="col-md-1">
 							<i class="fa fa-facebook-square 2" aria-hidden="true" id = "share_button"></i>
+						</div>
+						<% end %>
+						
+						<div class="col-md-1">
+							<i class="fa fa-facebook-square 2" aria-hidden="true" id = "share_button"></i>
+							<%= link_to 'Share on Facebook', "http://www.facebook.com/dialog/feed?app_id=1622810844676345' +
+						        '&link=[FULLY_QUALIFIED_LINK_TO_SHARE_CONTENT]' +
+						        '&picture=[LINK_TO_IMAGE]' +
+						        '&name=' + encodeURIComponent('[CONTENT_TITLE]') +
+						        '&caption=' + encodeURIComponent('[CONTENT_CAPTION]) +
+						        '&description=' + encodeURIComponent('[CONTENT_DESCRIPTION]') +
+						        '&redirect_uri=' + FBVars.baseURL + '[URL_TO_REDIRECT_TO_AFTER_SHARE]' +
+						        '&display=popup';" %>
+
 						</div>
 						<div class="col-md-2">
 							<% if thrill.reservations.length == 0 %>
@@ -35,6 +51,8 @@
 			</div>
 		</div>
 </div>
+
+<% if false %>
 
 <div id="fb-root"></div>
 <script>
@@ -57,7 +75,7 @@
 			FB.ui(
 			{
 				method: 'feed',
-				name: 'This is the content of the "name" field.',
+				name: <%= thrill.training.tr_name %>,
 				link: 'http://www.groupstudy.in/articlePost.php?id=A_111213073144',
 				picture: 'http://www.groupstudy.in/img/logo3.jpeg',
 				caption: 'Top 3 reasons why you should care about your finance',
@@ -67,4 +85,6 @@
 		});
 	});
 </script>
+
+<% end %>
 
