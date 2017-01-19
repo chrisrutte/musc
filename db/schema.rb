@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160927160602) do
+ActiveRecord::Schema.define(version: 20170118201902) do
 
   create_table "conversations", force: :cascade do |t|
     t.integer  "sender_id"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20160927160602) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "thrill_id"
+    t.boolean  "status"
     t.index ["thrill_id"], name: "index_reservations_on_thrill_id"
     t.index ["user_id"], name: "index_reservations_on_user_id"
   end

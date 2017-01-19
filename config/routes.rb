@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   get '/search' => 'pages#search'
   get '/faq' => 'pages#faq'
 
-
+  post '/notify' => 'reservations#notify'
+  post '/your_trips' => 'reservations#your_trips'
 
 end
