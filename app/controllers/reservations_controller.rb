@@ -1,8 +1,9 @@
 class ReservationsController < ApplicationController
 	before_action :authenticate_user!, except: [:notify]
 #	before_action :set_thrill
+	skip_before_filter :verify_authenticity_token
+	protect_from_forgery except: [:notify, :your_trips]
 
-	
 
 	def preload
 		training = Training.find(params[:training_id])
@@ -31,16 +32,18 @@ class ReservationsController < ApplicationController
 				mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
 			    
 			    payment = mollie.payments.create(
-			        amount: 10.00,
-			        description: 'My first API payment',
-			        redirect_Url: 'http://5f142fad.ngrok.io/your_trips',
-			        webhookUrl: 'http://5f142fad.ngrok.io/notify',
+			        amount: @reservation.thrill.training.tr_price,
+			        description: 'Musc' + @reservation.thrill.training.tr_name,
+			        redirect_Url: 'https://whispering-garden-94462.herokuapp.com/your_trips',
+			        webhookUrl: 'https://whispering-garden-94462.herokuapp.com/notify',
 			        metadata: {
-			        	reservation_id: @reservation.id
+			        	reservationid: @reservation.id
 			        }
 			    )
 
 #			    payment = mollie.payments.get(payment.id)
+
+				@reservation.update_attributes payid:payment.id
 
 				redirect_to payment.payment_url
 
@@ -54,14 +57,23 @@ class ReservationsController < ApplicationController
 #		@reservation = Reservation.new(reservation_params)
 #		@reservation = @thrill.reservations.new(reservation_params)
 
-	protect_from_forgery except: [:notify]
-	def notify
-		params.permit!
-		status = params[:payment_status]
+	
+#	protect_from_forgery with: :null_session, if: -> {request.format.json?}
 
-		reservation = Reservation.find(params[:reservation_id])
+	def notify
+
+		require 'Mollie/API/Client'
+
+		mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
+
+		payment = mollie.payments.get(params[:id])
+
+#		params.permit!
+#		status = params[:status]
 
 		if payment.paid?
+		  
+		  reservation = Reservation.find(payment.metadata.reservationid)
 		  reservation.update_attributes status:true
 		else
 			reservation.destroy
@@ -71,9 +83,9 @@ class ReservationsController < ApplicationController
 
 	end
 
-	protect_from_forgery except: [:your_trips]
+
 	def your_trips
-		@reservations = current_user.reservations.joins(:thrill).order('thrills.thrilldate asc').where('? <= thrills.thrilldate', Date.today)
+		@reservations = current_user.reservations.joins(:thrill).order('thrills.thrilldate asc').where('? <= thrills.thrilldate AND status == ?', Date.today, true)
 	end
 
 	def your_reservations
