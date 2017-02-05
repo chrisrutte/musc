@@ -1,9 +1,11 @@
-require 'Mollie/API/Client'
+
 
 class ReservationsController < ApplicationController
 	before_action :authenticate_user!, except: [:notify]
 	skip_before_filter :verify_authenticity_token
 	protect_from_forgery except: [:notify, :your_trips]
+
+	require 'Mollie/API/Client'
 
 
 	def preload
