@@ -37,8 +37,8 @@ class ReservationsController < ApplicationController
 			    payment = mollie.payments.create(
 			        amount: @reservation.thrill.training.tr_price,
 			        description: 'Musc: ' + @reservation.thrill.training.tr_name,
-			        redirect_Url: 'http://8a3a73cb.ngrok.io/your_trips',
-			        webhookUrl: 'http://8a3a73cb.ngrok.io/notify',
+			        redirect_Url: 'https://whispering-garden-94462.herokuapp.com/your_trips',
+			        webhookUrl: 'https://whispering-garden-94462.herokuapp.com/notify',
 			        metadata: {
 			        	reservationid: @reservation.id
 			        }
@@ -65,7 +65,7 @@ class ReservationsController < ApplicationController
 
 	def notify
 
-		require 'Mollie/API/Client'
+		require 'mollie/api/client'
 
 		mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
 
