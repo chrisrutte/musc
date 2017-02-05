@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
 # toegevoegd obv heroku controller
-# ruby '2.2.4'
+ruby '2.2.4'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.0.0'
@@ -54,7 +54,7 @@ gem 'thin'
 
 gem 'ransack', '~> 1.6', '>= 1.6.6'
 
-gem 'mollie-api-ruby'
+gem 'mollie-api-ruby', require: 'Mollie/API/Client'
 
 gem 'nio4r'
 
