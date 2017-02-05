@@ -25,7 +25,8 @@ class ReservationsController < ApplicationController
 
 			if @reservation
 
-#				require 'Mollie/API/Client'
+				require 'Mollie/API/Client'
+#				require 'mollie-api-ruby'
 
 				mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
 			    
