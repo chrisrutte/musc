@@ -5,7 +5,7 @@ class ReservationsController < ApplicationController
 	skip_before_filter :verify_authenticity_token
 	protect_from_forgery except: [:notify, :your_trips]
 
-	require 'Mollie/API/Client'
+
 
 
 	def preload
@@ -30,7 +30,7 @@ class ReservationsController < ApplicationController
 			if @reservation
 
 
-#				require 'mollie-api-ruby'
+				require 'mollie/api/client'
 
 				mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
 			    
