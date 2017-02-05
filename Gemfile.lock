@@ -285,6 +285,7 @@ DEPENDENCIES
   jquery-ui-rails
   meta_request
   mollie-api-ruby
+  nio4r
   omniauth (~> 1.3, >= 1.3.1)
   omniauth-facebook (~> 4.0)
   paperclip
@@ -305,8 +306,5 @@ DEPENDENCIES
   uglifier (>= 1.3.0)
   web-console
 
-RUBY VERSION
-   ruby 2.2.4p230
-
 BUNDLED WITH
-   1.13.6
+   1.14.3

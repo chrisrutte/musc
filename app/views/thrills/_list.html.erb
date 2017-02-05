@@ -14,7 +14,7 @@
 							<%= thrill.training.tr_name %>
 						</div>
 						<div class="col-md-1">
-							<%= thrill.reservations.length %> / <%= thrill.training.tr_max_attendants %>
+							<%= thrill.reservations.where('status == ?', true).length %> / <%= thrill.training.tr_max_attendants %>
 						</div>
 						<div class="col-md-2">
 							<%= link_to "Deelnemers", thrill %>

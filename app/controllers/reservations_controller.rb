@@ -33,9 +33,9 @@ class ReservationsController < ApplicationController
 			    
 			    payment = mollie.payments.create(
 			        amount: @reservation.thrill.training.tr_price,
-			        description: 'Musc' + @reservation.thrill.training.tr_name,
-			        redirect_Url: 'https://whispering-garden-94462.herokuapp.com/your_trips',
-			        webhookUrl: 'https://whispering-garden-94462.herokuapp.com/notify',
+			        description: 'Musc: ' + @reservation.thrill.training.tr_name,
+			        redirect_Url: 'http://8a3a73cb.ngrok.io/your_trips',
+			        webhookUrl: 'http://8a3a73cb.ngrok.io/notify',
 			        metadata: {
 			        	reservationid: @reservation.id
 			        }

@@ -139,14 +139,14 @@
 									<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %>
 								</div>
 								<div class="col-md-2">
-									<%= thrill.reservations.length %> / <%= thrill.training.tr_max_attendants %>
+									<%= thrill.reservations.where('status == ?', true).length %> / <%= thrill.training.tr_max_attendants %>
 								</div>
 								
 
 								<div class="col-md-3 right">
-									<% if Reservation.where("thrill_id = ? AND user_id = ?", thrill.id, current_user.id).present? %>	
+									<% if Reservation.where("thrill_id = ? AND user_id = ? AND status == ?", thrill.id, current_user.id, true).present? %>	
 										Al geboekt
-									<% elsif thrill.reservations.length == thrill.training.tr_max_attendants %>
+									<% elsif thrill.reservations.where('status == ?', true).length == thrill.training.tr_max_attendants %>
 										Vol
 
 									<% else %>
