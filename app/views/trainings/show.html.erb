@@ -144,7 +144,7 @@
 								
 
 								<div class="col-md-3 right">
-									<% if Reservation.where("thrill_id = ? AND user_id = ? AND status == ?", thrill.id, current_user.id, true).present? %>	
+									<% if Reservation.where("thrill_id = ? AND user_id = ? AND status = ?", thrill.id, current_user.id, true).present? %>	
 										Al geboekt
 									<% elsif thrill.reservations.where('status == ?', true).length == thrill.training.tr_max_attendants %>
 										Vol

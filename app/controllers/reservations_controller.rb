@@ -1,6 +1,5 @@
 class ReservationsController < ApplicationController
 	before_action :authenticate_user!, except: [:notify]
-#	before_action :set_thrill
 	skip_before_filter :verify_authenticity_token
 	protect_from_forgery except: [:notify, :your_trips]
 
@@ -13,8 +12,7 @@ class ReservationsController < ApplicationController
 		render json: reservations
 	end
 
-# require 'Mollie/API/Client'
-	
+
 	
 
 	def create
@@ -41,13 +39,13 @@ class ReservationsController < ApplicationController
 			        }
 			    )
 
-#			    payment = mollie.payments.get(payment.id)
+
 
 				@reservation.update_attributes payid:payment.id
 
 				redirect_to payment.payment_url
 
-#				redirect_to @reservation.thrill.training, notice: "Je training ligt vast, succes!"
+
 			else
 				redirect_to @thrill.training, notice: "Helaas, de training is vol"
 			end
