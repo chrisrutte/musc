@@ -54,7 +54,9 @@ gem 'thin'
 
 gem 'ransack', '~> 1.6', '>= 1.6.6'
 
-gem 'mollie-api-ruby', require: 'Mollie/API/Client'
+gem 'mollie-api-ruby'
+
+# gem 'mollie-api-ruby', require: 'Mollie/API/Client'
 
 gem 'nio4r'
 
