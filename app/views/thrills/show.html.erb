@@ -14,7 +14,7 @@
 
 			<div class="panel-body">
 
-				<% @thrill.reservations.each do |reservation| %>
+				<% @thrill.reservations.where('status = ?', true).each do |reservation| %>
 
 					<div class="row">
 						<div class="col-md-6">
