@@ -67,7 +67,7 @@ class ReservationsController < ApplicationController
 
 		require 'mollie/api/client'
 
-		mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
+		mollie = Mollie::API::Client.new('live_AGgqn6FwbtDCPyWsNDv4VqzUhsfbr8')
 
 		payment = mollie.payments.get(params[:id])
 
