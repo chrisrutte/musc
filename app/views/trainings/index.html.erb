@@ -1,51 +1,41 @@
-<div class="row">
-	<div class="col-md-3">
-		<ul class="sidebar-list">
-			<li class="sidebar-item"><%= link_to "Jouw trainingen", trainings_path, class: "sidebar-link active" %></li>
-			<li class="sidebar-item"><%= link_to "Trainingen te geven", thrills_path, class: "sidebar-link" %></li>
-			<li class="sidebar-item"><%= link_to "Trainingen te doen", your_trips_path, class: "sidebar-link" %></li>	
-		</ul>
-	</div>
+<div class="container">
+	<div class="row">
+		<div class="col-md-3">
+			<ul class="sidebar-list">
+				<li class="sidebar-item"><%= link_to "Jouw trainingen", trainings_path, class: "sidebar-link active" %></li>
+				<li class="sidebar-item"><%= link_to "Trainingen te geven", thrills_path, class: "sidebar-link" %></li>
+				<li class="sidebar-item"><%= link_to "Trainingen te doen", your_trips_path, class: "sidebar-link" %></li>	
+			</ul>
+		</div>
 
-	<% if @trainings.length > 0 %>
-	<div class="col-md-9 text-center">
-
-
-			<%= link_to "Voeg datums toe aan je trainingen", thrills_path, class: "btn btn-primary wide" %>
-			<br><br>
-	</div>
-	<% end %>
-
-	<div class="col-md-9">
-
-	
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Trainingen die jij geeft </div>
-
-			<div class="panel-body">
-
-
+		<% if @trainings.length > 0 %>
+		<div class="col-md-9 text-center">
+				<%= link_to "Voeg datums toe aan je trainingen", thrills_path, class: "btn btn-primary wide" %>
+				<br><br>
+		<% end %>
+		</div>
+		<div class="col-md-9">
+			<h3>Trainingen die jij geeft</h3>
 				<% if @trainings.length == 0 %>Je hebt nog geen trainingen aangemaakt. <%= link_to "Word trainer!", new_training_path %>
 				<% end %>
-
-				<% @trainings.each do |training| %>
-					<div class="row">
-						<div class="col-md-2">
+			<table class="table">
+				<tbody>
+					<% @trainings.each do |training| %>
+					<tr>
+						<td class="col-md-2">
 							<%= image_tag training.photos[0].image.url(:thumb) if training.photos.length > 0 %>
-						</div>
-						<div class="col-md-8">
+						</td>
+						<td class="col-md-7">
 							<h4><%= link_to training_path(training) do %><%= training.tr_name %><% end %></h4><% if training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %> (geen datums in de toekomst)<% end %>
-						</div>
-						<div class="col-md-2">
+						</td>
+						<td class="col-md-3">
 							<%= link_to "Update", edit_training_path(training), class: "btn btn-primary" %>
-						</div>
-					
-
-					</div>
-					<hr>
-				<% end %>
-			</div>
+						</td>
+					</tr>
+					<% end %>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>
+

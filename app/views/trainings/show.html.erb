@@ -1,17 +1,16 @@
-<div class="panel panel-default">
-	<div class="panel-body">
-
-		<!-- Image -->
-		<% if false %>
-		<div class="row">
-			<div class="col-md-12">
-				<%= image_tag @photos[0].image.url(), class: "img-responsive" if @photos.length > 0 %>
-			</div>
+<div id="mainpic">
+	<div class="row">
+	<!-- Image -->
+	<% if false %>
+	<div class="row">
+		<div class="col-md-12">
+			<%= image_tag @photos[0].image.url(), class: "img-responsive" if @photos.length > 0 %>
 		</div>
-		<% end %>
+	</div>
+	<% end %>
 
-		<!-- Foto Caroussel -->
-		<% if @photos.length > 0 %>
+	<!-- Foto Caroussel -->
+	<% if @photos.length > 0 %>
 		<div class="row">
 			<div class="col-md-12">
 
@@ -49,206 +48,200 @@
 				</div>
 			</div>
 		</div>
-		<% end %>
-		<br>
-
-		<!-- Main Intro -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="row">
-					<div class="col-md-2 text-center">
-						<%= image_tag avatar_url(@training.user), class: "img-circle avatar-large" %><br>
-						<%= @training.user.fullname %>
-					</div>
-					<div class="col-md-10">
-						<h4><%= @training.tr_name %></h4><span id="average_rating"></span> (<%= @reviews.count %>)<br>
-						<%= @training.tr_location %>
-						<br><br>
-						<div class="row text-center row-space-1">
-							<div class="col-md-2">
-								<% if @training.tr_gender == 'Dudes' %><i class="fa fa-mars fa-3x"></i><% end %>
-								<% if @training.tr_gender == 'Chicks' %><i class="fa fa-venus fa-3x"></i><% end %> 
-								<% if @training.tr_gender == 'Allebei' %><i class="fa fa-transgender fa-3x"></i><% end %> 
-							</div>
-							<div class="col-md-2">
-								<i class="fa fa-users fa-3x"></i>
-							</div>
-							<div class="col-md-2">
-								<i class="fa fa-clock-o fa-3x"></i>
-							</div>
-							<div class="col-md-2">
-								<i class="fa fa-eur fa-3x"></i>
-							</div>
-							<div class="col-md-2">
-								<i class="fa fa-star-o fa-3x"></i>
-							</div>								
-						</div>
-						<div class="row text-center">
-							<div class="col-md-2">
-								<%= @training.tr_gender %>
-							</div>
-							<div class="col-md-2">
-								Max <%= @training.tr_max_attendants %> 
-							</div>
-							<div class="col-md-2">
-								<%= @training.tr_duration %> min
-							</div>
-							<div class="col-md-2">
-								<%= number_to_currency(@training.tr_price, unit: '€') %>
-							</div>
-							<div class="col-md-2">
-								<%= @training.average_rating.round(2) %> (<%= @reviews.count %>)
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<% if false %>
-			<div class="col-md-3">
-			<!-- Reservation form -->
-				<%= render 'reservations/form' %>
-			</div>
-			<% end %>
-		</div>
-
-		<!-- About -->
-		<div class="row">
-			<div class="col-md-12">
-				<h3>Over deze training</h3>
-				<p><%= @training.tr_description %></p>
-			</div>
-		</div>
-		<br>
-
-		<!-- Reserveringen -->
-		<div class="row">
-			<div class="col-md-12">
-				<div class="panel panel-default">
-					<div class="panel-heading">
-						Beschikbare datums
-					</div>
-
-					<div class="panel-body">
-
-						<% if @training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %>
-						Er staan helaas geen datums gepland voor deze training <% end %>
-
-						<% @thrills.where('? <= thrilldate', Date.today).each do |thrill| %>
-							<div class="row">
-								<div class="col-md-5">
-									<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %>
-								</div>
-								<div class="col-md-2">
-									<%= thrill.reservations.where('status = ?', true).length %> / <%= thrill.training.tr_max_attendants %>
-								</div>
-								
-
-								<div class="col-md-3 right">
-									<% if Reservation.where("thrill_id = ? AND user_id = ? AND status = ?", thrill.id, current_user.id, true).present? %>	
-										Al geboekt
-									<% elsif thrill.reservations.where('status = ?', true).length == thrill.training.tr_max_attendants %>
-										Vol
-
-									<% else %>
-										<%= link_to "Inschrijven", thrill_reservations_path(thrill), method: :post , class: "btn btn-primary" %>
-									<% end %>
-								</div>
-								<div class="col-md-2">
-									<%= number_to_currency(@training.tr_price, unit: '€') %>
-								</div>
-							</div>
-							<hr>
-						<% end %>
-					</div>
-				</div>
-			</div>
-		</div>		
-
-
-		<!-- Reviews -->
-		<div class="row">
-			<div class="col-md-12">
-				<h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
-				<div class="container">
-					<div>
-						<%= render 'reviews/form' if @booked > 0 && !@hasReview %>
-					</div>
-					<div>
-						<%= render 'reviews/list' %>
-						<br>
-					</div>
-				</div>
-			</div>
-		</div>
-
-
-		<!-- Google Map -->
-		<div class="row">
-			<div class="col-md-12">
-				
-				<style>
-				#map {
-					width: 100%;
-					height: 400px;
-				}
-				</style>
-
-				<div id="map"></div>
-
-			    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiRstCee_M5mnbAKb4XRTDtaC80bwf-AQ&callback=initMap" async defer>
-			    </script>
-
-			    <script>
-			      function initMap() {
-			        // Create a map object and specify the DOM element for display.
-			        var map = new google.maps.Map(document.getElementById('map'), {
-			          center: {lat: <%= @training.latitude %>, lng: <%= @training.longitude %>},
-			          scrollwheel: false,
-			          zoom: 15
-			        });
-
-			        var marker = new google.maps.Marker({
-			          position: {lat: <%= @training.latitude %>, lng: <%= @training.longitude %>},
-			          map: map,
-			          title: 'Training'
-			        });
-			      }
-
-			    </script>
-			</div>
-		</div>
-
-		<% if false %>
-		<!-- Close by Rooms -->
-		<h3>Ook dichtbij</h3>
-		<div class="row">
-			<% for training in @training.nearbys(5) %>
-				<div class="col-md-4">
-					<div class="panel panel-default">
-						<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
-							<% if false %>
-							<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
-							<% end %>
-						</div>
-						<div class="panel-body">
-							<%= link_to training.tr_name, training %><br>
-							(<%= training.distance.round(1) %> miles away)
-						</div>
-					</div>
-				</div>
-			<% end %>
-		</div>
-		<% end %>
-
-
 	</div>
 </div>
+<% end %>
+<div class="container">
+	<!-- Main Intro -->
+	<div class="row" id="picview">
+		<div class="col-md-7">
+			<div class="row">
+				<div class="col-md-8">
+					<h1><%= @training.tr_name %></h1>
+					<%= @training.tr_location %>  <span id="average_rating"></span> (<%= @reviews.count %>)<br>
+				</div>
+				<div class="col-md-4 text-center">
+					<%= image_tag avatar_url(@training.user), class: "img-circle avatar-large" %><br>
+					<%= @training.user.fullname %>
+				</div>
+			</div>
+			<div class="row text-center row-space-1">
+			<hr>
+				<div class="col-md-2">
+					<% if @training.tr_gender == 'Dudes' %><i class="fa fa-mars fa-3x"></i><% end %>
+					<% if @training.tr_gender == 'Chicks' %><i class="fa fa-venus fa-3x"></i><% end %> 
+					<% if @training.tr_gender == 'Allebei' %><i class="fa fa-transgender fa-3x"></i><% end %> 
+				</div>
+				<div class="col-md-2">
+					<i class="fa fa-users fa-3x"></i>
+				</div>
+				<div class="col-md-2">
+					<i class="fa fa-clock-o fa-3x"></i>
+				</div>
+				<div class="col-md-2">
+					<i class="fa fa-eur fa-3x"></i>
+				</div>
+				<div class="col-md-2">
+					<i class="fa fa-star-o fa-3x"></i>
+				</div>								
+			</div>
+			<div class="row text-center">
+				<div class="col-md-2">
+					<%= @training.tr_gender %>
+				</div>
+				<div class="col-md-2">
+					Max <%= @training.tr_max_attendants %> 
+				</div>
+				<div class="col-md-2">
+					<%= @training.tr_duration %> min
+				</div>
+				<div class="col-md-2">
+					<%= number_to_currency(@training.tr_price, unit: '€') %>
+				</div>
+				<div class="col-md-2">
+					<%= @training.average_rating.round(2) %> (<%= @reviews.count %>)
+				</div>
+			<br>
+			<hr>	
+			</div>
 
-<script>
-	$('#average_rating').raty({
-		path: '/assets',
-		readOnly: true,
-		score: <%= @training.average_rating %>
-	});
 
-</script>
+			<!-- About -->
+			<div class="row">
+
+					<h3>Over deze training</h3>
+					<p><%= @training.tr_description %></p>
+				<hr>
+			</div>
+			<!-- Reviews -->
+			<div class="row">
+					<h3>Reviews <span id="average_rating"></span> (<%= @reviews.count %>)</h3>
+						<div>
+							<%= render 'reviews/form' if @booked > 0 && !@hasReview %>
+						</div>
+						<div>
+							<%= render 'reviews/list' %>
+							<br>
+						</div>
+			</div>
+		</div>
+		<% if false %>
+		<div class="col-md-3">
+		<!-- Reservation form -->
+			<%= render 'reservations/form' %>
+		</div>
+		<% end %>
+
+
+
+<!-- Reserveringen -->
+<div class="col-md-4 col-sm-12 pull-right">
+	<div class="row">
+		<h3>Nu inschrijven</h3>
+		<table class="table">
+			<tbody>
+			<% if @training.thrills.where('? <= thrills.thrilldate', Date.today).length == 0 %>
+			Er staan helaas geen datums gepland voor deze training <% end %>
+			<% @thrills.where('? <= thrilldate', Date.today).each do |thrill| %>
+				<tr>
+					<td>
+						<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %>
+					</td>
+						<% if false %>
+						<div class="col-md-2 vcenter">
+							<%= thrill.reservations.where('status = ?', true).length %> / <%= thrill.training.tr_max_attendants %>
+						</div>
+						<% end %>
+					<td class="text-center">
+						<% if Reservation.where("thrill_id = ? AND user_id = ? AND status = ?", thrill.id, current_user.id, true).present? %>
+							Al geboekt
+						<% elsif thrill.reservations.where('status = ?', true).length == thrill.training.tr_max_attendants %>
+							Vol
+						<% else %>
+							<%= link_to "Inschrijven", thrill_reservations_path(thrill), method: :post , class: "btn btn-primary" %>
+						<% end %>
+					</td>
+						<% if false %>
+						<div class="col-md-2">
+							<%= number_to_currency(@training.tr_price, unit: '€') %>
+						</div>
+						<% end %>
+					</tr>
+				<% end %>
+			</tbody>
+		</table>
+	</div>
+</div>		
+
+
+
+
+<!-- Google Map -->
+<div class="row">
+	<div class="col-md-12">
+		
+		<style>
+		#map {
+			width: 100%;
+			height: 400px;
+		}
+		</style>
+
+		<div id="map"></div>
+
+	    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiRstCee_M5mnbAKb4XRTDtaC80bwf-AQ&callback=initMap" async defer>
+	    </script>
+
+	    <script>
+	      function initMap() {
+	        // Create a map object and specify the DOM element for display.
+	        var map = new google.maps.Map(document.getElementById('map'), {
+	          center: {lat: <%= @training.latitude %>, lng: <%= @training.longitude %>},
+	          scrollwheel: false,
+	          zoom: 15
+	        });
+
+	        var marker = new google.maps.Marker({
+	          position: {lat: <%= @training.latitude %>, lng: <%= @training.longitude %>},
+	          map: map,
+	          title: 'Training'
+	        });
+	      }
+
+	    </script>
+	</div>
+</div>
+		</div>
+	</div>
+			<% if false %>
+			<!-- Close by Rooms -->
+			<h3>Ook dichtbij</h3>
+			<div class="row">
+				<% for training in @training.nearbys(5) %>
+					<div class="col-md-4">
+						<div class="panel panel-default">
+							<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
+								<% if false %>
+								<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
+								<% end %>
+							</div>
+							<div class="panel-body">
+								<%= link_to training.tr_name, training %><br>
+								(<%= training.distance.round(1) %> miles away)
+							</div>
+						</div>
+					</div>
+				<% end %>
+			</div>
+			<% end %>
+	</div>
+</div>	
+
+	<script>
+		$('#average_rating').raty({
+			path: '/assets',
+			readOnly: true,
+			score: <%= @training.average_rating %>
+		});
+
+	</script>

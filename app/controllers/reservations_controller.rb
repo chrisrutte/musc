@@ -32,13 +32,13 @@ class ReservationsController < ApplicationController
 
 				require 'mollie/api/client'
 
-				mollie = Mollie::API::Client.new('live_AGgqn6FwbtDCPyWsNDv4VqzUhsfbr8')
+				mollie = Mollie::API::Client.new('test_pAs5HfPsxa2DxGNus8Bj2rbeD35R4v')
 			    
 			    payment = mollie.payments.create(
 			        amount: @reservation.thrill.training.tr_price,
 			        description: 'Musc: ' + @reservation.thrill.training.tr_name,
-			        redirect_Url: 'https://whispering-garden-94462.herokuapp.com/your_trips',
-			        webhookUrl: 'https://whispering-garden-94462.herokuapp.com/notify',
+			        redirect_Url: 'http://3f3393a4.ngrok.io/your_trips',
+			        webhookUrl: 'http://3f3393a4.ngrok.io/notify',
 			        metadata: {
 			        	reservationid: @reservation.id
 			        }
@@ -67,7 +67,7 @@ class ReservationsController < ApplicationController
 
 		require 'mollie/api/client'
 
-		mollie = Mollie::API::Client.new('live_AGgqn6FwbtDCPyWsNDv4VqzUhsfbr8')
+		mollie = Mollie::API::Client.new('test_pAs5HfPsxa2DxGNus8Bj2rbeD35R4v')
 
 		payment = mollie.payments.get(params[:id])
 

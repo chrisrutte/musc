@@ -1,189 +1,203 @@
-<div class="row">
-	<div class="col-md-12">
-
-			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiRstCee_M5mnbAKb4XRTDtaC80bwf-AQ&callback=initMap" async defer>
-		    </script>
-
-		    <script>
-		      function initMap() {
-		        // Create a map object and specify the DOM element for display.
-		        var map = new google.maps.Map(document.getElementById('widget'), {
-		        	<% if @arrTrainings.length > 0 %>
-		          center: {lat: <%= @arrTrainings[0].latitude %>, lng: <%= @arrTrainings[0].longitude %>},
-		          	<% else %>
-		          	center: {lat: 44.5403, lng: -78.5463},
-
-		          	<% end %>
-		          scrollwheel: false,
-		          zoom: 13
-		        });
-
-		        <% @arrTrainings.each do |training| %>
-
-		        var marker = new google.maps.Marker({
-		          position: {lat: <%= training.latitude %>, lng: <%= training.longitude %>},
-		          map: map,
-		          title: '<%= training.tr_name %>'
-		        });
-		        <% end %> 
-		      }
-
-		    </script>
-
-	</div>
-
-
-
+<div class="container">
 	<div class="row">
 		<div class="col-md-12">
 
+				<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCiRstCee_M5mnbAKb4XRTDtaC80bwf-AQ&callback=initMap" async defer>
+			    </script>
 
-			<%= search_form_for @search, url: search_path do |f| %>
-			<div class="row">
-				<div class="col-md-6">
-					<%= text_field_tag :search, params[:search], placeholder: "Waar ga je trainen?", class: "form-control" %><br>
-				</div>
+			    <script>
+			      function initMap() {
+			        // Create a map object and specify the DOM element for display.
+			        var map = new google.maps.Map(document.getElementById('widget'), {
+			        	<% if @arrTrainings.length > 0 %>
+			          center: {lat: <%= @arrTrainings[0].latitude %>, lng: <%= @arrTrainings[0].longitude %>},
+			          	<% else %>
+			          	center: {lat: 44.5403, lng: -78.5463},
 
-				<div class="col-md-3">
-					<%= text_field_tag :startdate, params[:startdate], placeholder: "Tussen", class: "form-control" %><br>
-				</div>
+			          	<% end %>
+			          scrollwheel: false,
+			          zoom: 13
+			        });
 
-				<div class="col-md-3">
-					<%= text_field_tag :enddate, params[:enddate], placeholder: "En", class: "form-control" %>
-				</div>
-			</div>
-			<br>
+			        <% @arrTrainings.each do |training| %>
 
-			<div class="row">
-				<div class="col-md-3">
-					<label>Max prijs</label>
-				</div>
-				<div class="col-md-3">
-					<%= f.text_field :tr_price_lteq, placeholder: "Max Price", class: "form-control" %>
-				</div>
-			</div>
-			<br>
+			        var marker = new google.maps.Marker({
+			          position: {lat: <%= training.latitude %>, lng: <%= training.longitude %>},
+			          map: map,
+			          title: '<%= training.tr_name %>'
+			        });
+			        <% end %> 
+			      }
 
-			<div class="row">
-				<div class="col-md-3">
-					<label>Minimale duur</label>
-				</div>
-				<div class="col-md-3">
-					<div class="form-group">
-						<%= f.text_field :tr_duration_gteq, placeholder: "Tijdsduur (min)", class: "form-control" %>
+			    </script>
+
+		</div>
+
+
+
+		<div class="row">
+			<div class="col-md-12">
+
+
+				<%= search_form_for @search, url: search_path do |f| %>
+				<div class="row">
+					<div class="col-md-6">
+						<%= text_field_tag :search, params[:search], placeholder: "Waar ga je trainen?", class: "form-control" %><br>
+					</div>
+
+					<div class="col-md-3">
+						<%= text_field_tag :startdate, params[:startdate], placeholder: "Tussen", class: "form-control" %><br>
+					</div>
+
+					<div class="col-md-3">
+						<%= text_field_tag :enddate, params[:enddate], placeholder: "En", class: "form-control" %>
 					</div>
 				</div>
-			</div>
+				<br>
 
-
-			<div class="row">
-
-			</div>
-
-			<div class="row">
-				<div class="col-md-3">
-					<label>Voor wie</label>
-				</div>					
-				<div class="col-md-3">
-					<%= check_box_tag "q[tr_gender_eq_any][]", "Chicks" %> Chicks
+				<div class="row">
+					<div class="col-md-3">
+						<label>Max prijs</label>
+					</div>
+					<div class="col-md-3">
+						<%= f.text_field :tr_price_lteq, placeholder: "Max Price", class: "form-control" %>
+					</div>
 				</div>
-				<div class="col-md-3">
-					<%= check_box_tag "q[tr_gender_eq_any][]", "Dudes" %> Dudes
-				</div>				
-				<div class="col-md-3">
-					<%= check_box_tag "q[tr_gender_eq_any][]", "Allebei" %> Allebei
-				</div>
-			</div>
-			<br>
+				<br>
 
-			<div class="row">
-				<%= f.submit "Search", class: "btn btn-primary" %>
-			</div>
-
-			<% end %>
-
-			<hr>
-			<h4>Resultaten</h4>
-			<div class="row">
-			<% @arrTrainings.each do |training| %>
-				<div class="col-md-4">
-					<div class="panel panel-default">
-						<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
-							<% if false %>
-							<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
-							<% end %>
+				<div class="row">
+					<div class="col-md-3">
+						<label>Minimale duur</label>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<%= f.text_field :tr_duration_gteq, placeholder: "Tijdsduur (min)", class: "form-control" %>
 						</div>
-						<div class="panel-body">
-							<% if(!user_signed_in?) %>
+					</div>
+				</div>
+
+
+				<div class="row">
+
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<label>Voor wie</label>
+					</div>					
+					<div class="col-md-3">
+						<%= check_box_tag "q[tr_gender_eq_any][]", "Chicks" %> Chicks
+					</div>
+					<div class="col-md-3">
+						<%= check_box_tag "q[tr_gender_eq_any][]", "Dudes" %> Dudes
+					</div>				
+					<div class="col-md-3">
+						<%= check_box_tag "q[tr_gender_eq_any][]", "Allebei" %> Allebei
+					</div>
+				</div>
+				<br>
+
+				<div class="row">
+					<%= f.submit "Search", class: "btn btn-primary" %>
+				</div>
+
+				<% end %>
+
+				<hr>
+
+				<div class="row">
+				<% @arrTrainings.each do |training| %>
+					<div class="col-md-4 col-sm-6 col-xs-12">
+					<% if(!user_signed_in?) %>
+						<div class="panel panel-default">
+							<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
+								<% if false %>
+								<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
+								<% end %>
+							</div>
+							<div class="panel-body">
 								<%= training.tr_name %>
-							<% else %>
-								<%= link_to training.tr_name, training %>
-							<% end %>
 								<%= image_tag "star-on.png" %> <%= training.average_rating %> 
+							</div>
 						</div>
+					<% else %>
+						<%= link_to training, :class => "blacklink" do %>
+							<div class="panel panel-default">
+								<div class="panel-heading preview" style="background-image: url('<%= training.photos[0].image.url(:medium) if training.photos.length > 0 %>')">
+									<% if false %>
+									<%= image_tag training.photos[0].image.url(:medium) if training.photos.length > 0 %>
+									<% end %>
+								</div>
+								<div class="panel-body">
+									<strong><%= number_to_currency(training.tr_price, unit: '€') %> <%= training.tr_name %></strong>
+									<%= image_tag "star-on.png" %> <%= training.average_rating %><br>
+									<small><%= training.tr_location %></small>
+								</div>
+							</div>
+						<% end %>				
+					<% end %>
 					</div>
+				<% end %>
 				</div>
-			<% end %>
 			</div>
 		</div>
 	</div>
-
 </div>
 
-<script>
-	$(function() {
-		$("#startdate").datepicker({
-			dateFormat: 'dd-mm-yy',
-			minDate: 0,
-			maxDate: '3m',
-			onSelect: function(selected) {
-				$('#enddate').datepicker("option", "minDate", selected);
-				$('#enddate').attr('disabled', false);
-			}
+	<script>
+		$(function() {
+			$("#startdate").datepicker({
+				dateFormat: 'dd-mm-yy',
+				minDate: 0,
+				maxDate: '3m',
+				onSelect: function(selected) {
+					$('#enddate').datepicker("option", "minDate", selected);
+					$('#enddate').attr('disabled', false);
+				}
+			});
+
+			$("#enddate").datepicker({
+				dateFormat: 'dd-mm-yy',
+				minDate: 0,
+				maxDate: '3m',
+				onSelect: function(selected) {
+					$('#startdate').datepicker("option", "maxDate", selected);
+				}
+			});
+		})
+
+
+	</script>
+
+
+
+	<!-- kaart mee laten schuiven, werkt nog niet 
+
+	<script>
+		
+		$(function(){ // document ready
+	 
+		  if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
+		 
+		    var stickyTop = $('.sticky').offset().top; // returns number 
+		 
+		    $(window).scroll(function(){ // scroll event
+		 
+		      var windowTop = $(window).scrollTop(); // returns number 
+		 
+		      if (stickyTop < windowTop){
+		        $('.sticky').css({ position: 'fixed', top: 0 });
+		      }
+		      else {
+		        $('.sticky').css('position','static');
+		      }
+		 
+		    });
+		 
+		  }
+		 
 		});
 
-		$("#enddate").datepicker({
-			dateFormat: 'dd-mm-yy',
-			minDate: 0,
-			maxDate: '3m',
-			onSelect: function(selected) {
-				$('#startdate').datepicker("option", "maxDate", selected);
-			}
-		});
-	})
+	</script>
 
-
-</script>
-
-
-
-<!-- kaart mee laten schuiven, werkt nog niet 
-
-<script>
-	
-	$(function(){ // document ready
- 
-	  if (!!$('.sticky').offset()) { // make sure ".sticky" element exists
-	 
-	    var stickyTop = $('.sticky').offset().top; // returns number 
-	 
-	    $(window).scroll(function(){ // scroll event
-	 
-	      var windowTop = $(window).scrollTop(); // returns number 
-	 
-	      if (stickyTop < windowTop){
-	        $('.sticky').css({ position: 'fixed', top: 0 });
-	      }
-	      else {
-	        $('.sticky').css('position','static');
-	      }
-	 
-	    });
-	 
-	  }
-	 
-	});
-
-</script>
-
--->
+	-->

@@ -1,4 +1,6 @@
+<div class="container">
 <div class="row">
+	<% if false %>
 	<div class="col-md-3">
 		<ul class="sidebar-list">
 			<li class="sidebar-item"><%= link_to "Jouw trainingen", trainings_path, class: "sidebar-link" %></li>
@@ -6,52 +8,58 @@
 			<li class="sidebar-item"><%= link_to "Trainingen te doen", your_trips_path, class: "sidebar-link active" %></li>	
 		</ul>
 	</div>
+	<% end %>
 
-	<div class="col-md-9">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Trainingen te doen </div>
+	<div class="col-md-12">
+		<h3>Trainingen te doen </h3>
+			<% if @reservations.length == 0 %>Je hebt geen trainingen op de planning staan. <%= link_to "Zoek een training en schrijf je in!", search_path %>
+			<% end %>
 
-			<div class="panel-body">
-
-				<% if @reservations.length == 0 %>Je hebt geen trainingen op de planning staan. <%= link_to "Zoek een training en schrijf je in!", search_path %>
-				<% end %>
-
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Datum</th>
+					<th></th>
+					<th>Training</th>
+					<th class="text-center">Trainer</th>
+					<th>Telefoon</th>
+				</tr>
+			</thead>
+			<tbody>
 				<% @reservations.each do |reservation| %>
-					<div class="row">
-						<div class="col-md-2">
+					<tr>
+						<td>
 							<%= reservation.thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= reservation.thrill.time.strftime("%H:%M") %>
-						</div>
-						<div class="col-md-2">
+						</td>
+						<td>
 							<%= link_to training_path(reservation.thrill.training) do %>
 							<% image_tag reservation.thrill.training.photos[0].image.url(:thumb) %>
 							<% end %>
-						</div>
-						<div class="col-md-4">
+						</td>
+						<td>
 							<%= link_to training_path(reservation.thrill.training) do %>
 							<% reservation.thrill.training.tr_name %>
 							<% end %>
-						</div>
-
-						<div class="col-md-2 text-center">
+						</td>
+						<td class="text-center">
 							<%= link_to user_path(reservation.thrill.training.user) do %>
 							<%= image_tag avatar_url(reservation.thrill.training.user), class: "img-circle avatar-medium" %><br>
 							<%= reservation.thrill.training.user.fullname %>
 							<% end %>
-						</div>
-						<div class="col-md-2">
+						</td>
+						<td>
 							<%= reservation.thrill.training.user.phone_number %>
-						</div>
+						</td>
 						
 						<% if false %>
 						<div class="col-md-2 right">
 							<h4>€ <%= reservation.thrill.training.tr_price %></h4>
 						</div>
 						<% end %>
-					</div>
-					<hr>
+					</tr>
 				<% end %>
-			</div>
-		</div>
+			</tbody>
+		</table>
 	</div>
+</div>
 </div>

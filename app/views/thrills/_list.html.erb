@@ -1,26 +1,24 @@
 <div class="row">
-		<div class="panel panel-default">
-			<div class="panel-heading">
-				Aankomende trainingen door jou </div>
-			<div class="panel-body">
-				<% if @current_user.thrills.where('? <= thrilldate', Date.today).length == 0 %>Je hebt nog geen datums voor je trainingen. Voeg de datums hier toe!
-				<% end %>
-				<% current_user.thrills.order("thrilldate ASC").where('? <= thrilldate', Date.today).each do |thrill| %>
-					<div class="row">
-						<div class="col-md-2">
-							<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %> 
-						</div>
-						<div class="col-md-4">
-							<%= thrill.training.tr_name %>
-						</div>
-						<div class="col-md-1">
-							<%= thrill.reservations.where('status = ?', true).length %> / <%= thrill.training.tr_max_attendants %>
-						</div>
-						<div class="col-md-2">
-							<%= link_to "Deelnemers", thrill %>
-						</div>
-
-						<% if false %>
+	<h3>Aankomende trainingen door jou</h3>
+		<% if @current_user.thrills.where('? <= thrilldate', Date.today).length == 0 %>Je hebt nog geen datums voor je trainingen. Voeg de datums hier toe!
+		<% end %>
+	<table class="table">
+		<tbody>
+		<% current_user.thrills.order("thrilldate ASC").where('? <= thrilldate', Date.today).each do |thrill| %>
+			<tr>
+				<td>
+					<%= thrill.thrilldate.strftime("%a %e %b '%y") %> - <%= thrill.time.strftime("%H:%M") %> 
+				</td>
+				<td>
+					<%= thrill.training.tr_name %>
+				</td>
+				<td>
+					<%= thrill.reservations.where('status = ?', true).length %> / <%= thrill.training.tr_max_attendants %>
+				</td>
+				<td>
+					<%= link_to "Deelnemers", thrill %>
+				</td>
+					<% if false %>
 						<div class="col-md-1">
 							<i class="fa fa-facebook-square 2" aria-hidden="true" id = "share_button"></i>
 						</div>
@@ -35,21 +33,17 @@
 						        '&description=' + encodeURIComponent('[CONTENT_DESCRIPTION]') +
 						        '&redirect_uri=' + FBVars.baseURL + '[URL_TO_REDIRECT_TO_AFTER_SHARE]' +
 						        '&display=popup';" %>
-
 						</div>
 						<% end %>
-						<div class="col-md-2">
-							<% if thrill.reservations.length == 0 %>
-								<%= link_to "Verwijder", [thrill] , method: :delete, data: {confirm: "Zeker weten?"} %>
-							<% end %>
-
-						</div>
-					</div>
-					<hr>
-					
-				<% end %>
-			</div>
-		</div>
+				<td>
+					<% if thrill.reservations.length == 0 %>
+						<%= link_to "Verwijder", [thrill] , method: :delete, data: {confirm: "Zeker weten?"} %>
+					<% end %>
+				</td>
+			</tr>
+		<% end %>
+		</tbody>
+	</table>
 </div>
 
 <% if false %>

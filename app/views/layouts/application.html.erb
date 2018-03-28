@@ -10,6 +10,7 @@
 
     <script src="https://use.fontawesome.com/481602dcc0.js"></script>
 
+    <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Lato">
 
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
     <!--
@@ -18,18 +19,28 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
+
   </head>
 
   <body>
 
-<%= render 'shared/navbar' %>
 
-<%= render 'shared/message' %>
+        <%= render 'shared/navbar' %>
 
+        <%= render 'shared/message' %>
+
+        <%= yield %>
+
+    
+    <div class="footer">
 
       <div class="container">
-    	<%= yield %>
+          <p class="text-muted credit">Example courtesy <a href="http://martinbean.co.uk">Martin Bean</a> and <a href="http://ryanfait.com/sticky-footer/">Ryan Fait</a>.</p>
       </div>
+    </div>
+
+
+
 
 <script type="text/javascript">
  (function(w) {

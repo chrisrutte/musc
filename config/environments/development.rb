@@ -60,28 +60,30 @@ Rails.application.configure do
 
 
 
-#  Paperclip.options[:command_path] = 'C:/GnuWin32/bin; C:/ImageMagick'
-#  Paperclip.options[:swallow_stderr] = false
+  Paperclip.options[:command_path] = 'C:/GnuWin32/bin; C:/ImageMagick'
+  Paperclip.options[:swallow_stderr] = false
 
 
 
 #  Paperclip::Attachment.default_options[:s3_host_name] = 'muscpics.s3.eu-central-1.amazonaws.com'
 
-  config.paperclip_defaults = {
-      storage: :s3,
-      s3_credentials: {
+
+
+#  config.paperclip_defaults = {
+#      storage: :s3,
+#      s3_credentials: {
   #   bucket: ENV["S3_BUCKET_NAME"],
-      bucket: 'muscpics',
-      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
-      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
+#      bucket: 'muscpics',
+#      access_key_id: ENV["AWS_ACCESS_KEY_ID"],
+#      secret_access_key: ENV["AWS_SECRET_ACCESS_KEY"],
   #    s3_region: ENV["AWS_REGION"]
-      s3_region: 'eu-central-1',
-    },
+#      s3_region: 'eu-central-1',
+#    },
 
   #  url: 's3_domain_url',
   #  path: '/:class/:attachment/:id_partition/:style/:filename',
   #  s3_host_name: 's3-eu-central-1.amazonaws.com',
-  }
+#  }
 
   config.i18n.default_locale = :nl
 #  config.active_record.default_time_zone = "UTC"
@@ -98,9 +100,6 @@ Rails.application.configure do
     authentication: 'plain'
 }
 
-# mollie = Mollie::API::Client.new('test_gUejkz43UkdeCauC22J6UNqqVRdpwW')
-#  mollie = Mollie::API::Client.new
-#  mollie.api_key =  "test_gUejkz43UkdeCauC22J6UNqqVRdpwW"
 
 end
 

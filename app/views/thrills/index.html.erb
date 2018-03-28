@@ -1,4 +1,6 @@
-<div class="row">
+<div class="container">
+
+
 	<% if false %>
 	<div class="col-md-3">
 		<ul class="sidebar-list">
@@ -9,56 +11,53 @@
 	</div>
 	<% end %>
 
-
-
-
-	<div class="col-md-12">
-		
-		<div class="row">
-
-			<%= form_for(@thrill, remote: true) do |f| %>
-
-			<div class="col-md-4">
-				<div class="form-group">
-					<% options = options_from_collection_for_select(@trainings, 'id', 'tr_name') %>
-					<%= f.select :training_id, options , id: "training_id", prompt: "Selecteer training", class: "form-control" %>
-				</div>
+	<div class="row">
+		<h3>Datums</h3>
+		<%= form_for(@thrill, remote: true) do |f| %>
+		<div class="col-md-4">
+			<div class="form-group">
+				<% options = options_from_collection_for_select(@trainings, 'id', 'tr_name') %>
+				<%= f.select :training_id, options , id: "training_id", prompt: "Selecteer training", class: "form-control" %>
 			</div>
+		</div>
 
-			<div class="col-md-2">
-				<div class="form-group">
-					<%= f.text_field :thrilldate, placeholder: 'Datum', class: 'form-control' %>
-				</div>
+		<div class="col-md-2">
+			<div class="form-group">
+				<%= f.text_field :thrilldate, placeholder: 'Datum', class: 'form-control' %>
 			</div>
-			<div class="col-md-2">
-				<div class="form-group">
-					<%= f.time_field :time, placeholder: 'Tijdstip', id: "time", class: "form-control" %>
-				</div>
+		</div>
+		<div class="col-md-2">
+			<div class="form-group">
+				<%= f.time_field :time, placeholder: 'Tijdstip', id: "time", class: "form-control" %>
 			</div>
-
-			<% if false %>
-
-			<div class="col-md-2">
-				<div class="form-group">
-					<%= f.select :thrillhr, [["0","0"],["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"], ["14","14"],["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["20","20"],["21","21"],["22","22"],["23","23"]], id: "thrillhr", prompt: "Uur", class: "form-control" %>
-				</div>
-			</div>
-
-			<div class="col-md-2">
-				<div class="form-group">
-					<%= f.select :thrillmin, [["0","0"],["5","5"], ["10","10"],["15","15"],["20","20"],["25","25"],["30","30"],["35","35"],["40","40"],["45","45"],["50","50"],["55","55"]], id: "thrillmin", prompt: "Min", class: "form-control" %>
-				</div>
-			</div>
-
-			<% end %>
-
-			<div class="col-md-2">
-				<div class="actions">
-					<%= f.submit "Voeg toe", class: "btn btn-primary" %>
-				</div>
+		</div>
+		<div class="col-md-2">
+			<div class="actions">
+				<%= f.submit "Voeg toe", class: "btn btn-primary" %>
 			</div>
 		</div>
 		<% end %>
+	</div>
+	<%= render 'thrills/list' %>
+</div>
+
+		<% if false %>
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<%= f.select :thrillhr, [["0","0"],["1","1"],["2","2"],["3","3"],["4","4"],["5","5"],["6","6"],["7","7"],["8","8"],["9","9"],["10","10"],["11","11"],["12","12"],["13","13"], ["14","14"],["15","15"],["16","16"],["17","17"],["18","18"],["19","19"],["20","20"],["21","21"],["22","22"],["23","23"]], id: "thrillhr", prompt: "Uur", class: "form-control" %>
+			</div>
+		</div>
+
+		<div class="col-md-2">
+			<div class="form-group">
+				<%= f.select :thrillmin, [["0","0"],["5","5"], ["10","10"],["15","15"],["20","20"],["25","25"],["30","30"],["35","35"],["40","40"],["45","45"],["50","50"],["55","55"]], id: "thrillmin", prompt: "Min", class: "form-control" %>
+			</div>
+		</div>
+
+		<% end %>
+
+
 
 		<% if false %>
 		<div class="panel panel-default">
@@ -92,10 +91,6 @@
 		</div>
 		<% end %>
 
-		<div id="thrills"><%= render 'thrills/list' %></div>
-
-	</div>
-</div>
 
 <script>
 $(function() {

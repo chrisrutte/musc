@@ -2,10 +2,27 @@
 @import "bootstrap";
 @import "toastr";
 
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  /* Set the fixed height of the footer here */
+  height: 60px;
+  background-color: #f5f5f5;
+}
+
 body {
 	color:565a5c;
-	background-color: #F8F8F8;
-	font-family: 'Open Sans', 'Helvetica Neue', Arial, sans-serif;
+	background-color: white;
+	font-family: 'Lato', 'Helvetica Neue', Arial, sans-serif;
+    height: 100%;
+    /* Margin bottom by footer height */
+    margin-bottom: 60px;
 }
 
 .container {
@@ -21,6 +38,22 @@ body {
 	font-size: 2em;
 	font-weight: 700;
     text-transform: uppercase;
+}
+
+.navbar-static-top {
+    border-width: 0 0 0px;
+}
+
+.barbeta {
+	margin-top: 43px;
+}
+
+#mainpic {
+	margin-top:-20px;
+}
+
+#picview {
+	margin-top: 15px;
 }
 
 .btn-primary.btn {
@@ -106,6 +139,14 @@ body {
 .form-control {
 	border-radius: 2px;
 	height: 4rem;
+	outline: none;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+}
+
+.form-control:focus {
+    border-color: #ff7e82;
 }
 
 .sidebar-list {
@@ -218,6 +259,12 @@ input [type=time] {
 
 }
 
+.panel {
+	border-radius: 0px;
+	border: 0px;
+	box-shadow: 0 0px 0px rgba(0, 0, 0, 0.05);
+}
+
 .panel-heading.preview {
 	padding-top: 75%;
 	width: 100%;
@@ -226,13 +273,29 @@ input [type=time] {
 	background-position: 50% 50%;
 }
 
+.panel-heading {
+	border-top-right-radius: 0px;
+    border-top-left-radius: 0px;
+    border-bottom: 0px;
+    text-overflow: ellipsis;
+}
+
 .panel-heading.preview img {
 	width: 100%;
 }
 
 .panel-body {
 	vertical-align: middle;
+	padding-top: 5px;
+    padding-bottom: 10px;
+    padding-left: 0px;
+    padding-right: 0px;
+}
 
+a.blacklink:-webkit-any-link {
+    color: black;
+    cursor: auto;
+    text-decoration: none;
 }
 
 .reservation-table td {
@@ -289,8 +352,14 @@ input [type=time] {
   display: table-cell;
 }
 
+.vcenter {
+    display: inline-block;
+    vertical-align: middle;
+    float: none;
+}
+
 .crop {
-  padding-top: 40%;
+  padding-top: 400px;
   width: 100%;
   overflow: hidden;
   background-size: cover;
@@ -321,7 +390,9 @@ input [type=time] {
     color: #FF5A5F;
 }
 
-
+.table > tbody > tr > td {
+     vertical-align: middle;
+}
 
 footer {
 	background: #eee;
